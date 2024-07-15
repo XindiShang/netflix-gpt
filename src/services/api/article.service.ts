@@ -8,11 +8,9 @@ import {
 export const getArticles = async (
   params: GetArticlesProps
 ): Promise<GetArticleResponse> => {
-  const { search, page } = params;
+  const { search } = params;
   const { data } = await api.get<GetArticleResponse>(
-    `https://newsdata.io/api/1/news?q=${
-      search ?? ''
-    }&page=${page}&apiKey=${newsApiKey}`
+    `https://newsdata.io/api/1/latest?q=${search ?? ''}&apiKey=${newsApiKey}`
   );
   return data;
 };

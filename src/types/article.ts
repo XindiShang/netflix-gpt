@@ -7,7 +7,6 @@ export interface GetArticleResponse {
 
 export interface GetArticlesProps {
   search?: string;
-  page: number;
 }
 
 export interface Article {

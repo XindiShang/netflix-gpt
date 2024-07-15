@@ -4,7 +4,7 @@ import { formatDate } from '@/lib/helper';
 import { useArticlesQuery } from '@/services/queries/article.query';
 import { type Article } from '@/types/article';
 
-export type Filter = { page: number; search?: string };
+export type Filter = { search?: string };
 
 export interface ArticleListProps {
   articles: Article[];
@@ -20,14 +20,14 @@ const ArticleList: React.FC<ArticleListProps> = ({ articles }) => {
       {articles.map((article) => (
         <div
           key={article.link}
-          className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3"
+          className="w-full px-1 my-1 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3"
         >
           <article className="overflow-hidden rounded-lg shadow-lg">
             <a href={article.link} target="_blank" rel="noreferrer">
               {article.image_url ? (
                 <img
                   alt="Placeholder"
-                  className="block h-auto w-full"
+                  className="block w-full h-auto"
                   src={article.image_url}
                 />
               ) : (
@@ -48,10 +48,10 @@ const ArticleList: React.FC<ArticleListProps> = ({ articles }) => {
               )}
             </a>
 
-            <header className="flex items-center justify-between leading-tight p-2 md:p-4">
+            <header className="flex items-center justify-between p-2 leading-tight md:p-4">
               <h1 className="text-lg">
                 <a
-                  className="no-underline hover:underline text-black"
+                  className="text-black no-underline hover:underline"
                   href={article.link}
                   target="_blank"
                   rel="noreferrer"
@@ -59,14 +59,14 @@ const ArticleList: React.FC<ArticleListProps> = ({ articles }) => {
                   {article.title}
                 </a>
               </h1>
-              <p className="text-grey-darker text-sm">
+              <p className="text-sm text-grey-darker">
                 {formatDate(article.pubDate)}
               </p>
             </header>
 
-            <footer className="flex items-center justify-between leading-none p-2 md:p-4">
+            <footer className="flex items-center justify-between p-2 leading-none md:p-4">
               <a
-                className="flex items-center no-underline hover:underline text-black"
+                className="flex items-center text-black no-underline hover:underline"
                 href="#"
               >
                 <img
@@ -96,8 +96,6 @@ const Articles = () => {
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
   const filter = useMemo<Filter>(
     () => ({
-      page: 1,
-      pageSize: 10,
       search: debouncedSearchTerm?.length ? debouncedSearchTerm : undefined,
     }),
     [debouncedSearchTerm]
@@ -105,13 +103,13 @@ const Articles = () => {
   const { isLoading, data } = useArticlesQuery(filter);
 
   return (
-    <div className="container my-12 mx-auto px-4 md:px-12">
+    <div className="container px-4 mx-auto my-12 md:px-12">
       <div className="flex justify-center w-full">
         <div className="mb-3 xl:w-[40%]">
-          <div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
+          <div className="relative flex flex-wrap items-stretch w-full mb-4 input-group">
             <input
               type="search"
-              className="form-control relative flex-auto min-w-0 block w-auto mr-2 px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              className="relative flex-auto block w-auto min-w-0 px-3 py-2 m-0 mr-2 text-base font-normal text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               placeholder="Enter search term"
               aria-label="Search"
               aria-describedby="button-addon3"

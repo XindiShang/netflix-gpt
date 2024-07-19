@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Articles from '../pages/Articles';
+import Browse from '../pages/Browse';
 import Home from '../pages/Home';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -20,6 +21,14 @@ const Router = () => (
         element={
           <PrivateRoute>
             <Articles />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/browse"
+        element={
+          <PrivateRoute>
+            <Browse />
           </PrivateRoute>
         }
       />

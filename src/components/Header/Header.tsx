@@ -8,7 +8,7 @@ const Header = () => {
   );
 
   return (
-    <nav className="relative z-10">
+    <nav>
       <div className="px-8 py-2">
         <div className="flex justify-between">
           <div>

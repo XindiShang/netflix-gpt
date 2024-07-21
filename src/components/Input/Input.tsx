@@ -1,47 +1,59 @@
 import { type InputHTMLAttributes } from 'react';
 import {
+  type FieldError,
   type FieldErrors,
   type FieldValues,
   type Path,
   type UseFormRegister,
 } from 'react-hook-form';
 
-export interface Props<
-  T extends FieldValues = FieldValues,
-  U extends FieldValues = FieldValues
-> extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
+export interface Props<T extends FieldValues = FieldValues>
+  extends InputHTMLAttributes<HTMLInputElement> {
+  name: Path<T>;
   label?: string;
+  labelClassName?: string;
+  inputClassName?: string;
   disabled?: boolean;
   register: UseFormRegister<T>;
-  errors?: FieldErrors<U>;
+  errors?: FieldErrors<T>;
 }
 
-const Input = <T extends FieldValues, U extends FieldValues>({
+const Input = <T extends FieldValues>({
   disabled = false,
   placeholder,
   errors,
   label,
   name,
-  value,
   register,
+  labelClassName = 'text-white/70',
+  inputClassName = '',
   ...rest
-}: Props<T, U>) => {
+}: Props<T>) => {
+  const error = errors?.[name];
+
   return (
-    <div className="flex flex-col">
-      <label className="flex" htmlFor={name}>
-        {label ?? ''}
-      </label>
+    <div className="w-full form-control">
+      {label && (
+        <label className="label" htmlFor={name}>
+          <span className={`label-text ${labelClassName}`}>{label}</span>
+        </label>
+      )}
       <input
-        className="border rounded-lg p-2 w-full mb-2"
+        id={name}
+        className={`input w-full input-bordered border-gray-500 input-ghost text-white focus:bg-transparent focus:text-white ${inputClassName} ${
+          error ? 'input-error border-error' : 'focus:outline-white'
+        }`}
         placeholder={placeholder}
         disabled={disabled}
-        value={value}
-        {...register(name as Path<T>)}
+        {...register(name)}
         {...rest}
       />
-      {errors && errors[name as keyof U] && (
-        <span className="">{errors[name as keyof U]?.message as string}</span>
+      {error && (
+        <div className="label">
+          <span className="text-xs text-error">
+            {(error as FieldError).message}
+          </span>
+        </div>
       )}
     </div>
   );

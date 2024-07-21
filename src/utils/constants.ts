@@ -3,3 +3,5 @@ export const LOGO =
 
 export const HERO_BACKGROUND =
   'https://assets.nflxext.com/ffe/siteui/vlv3/655a9668-b002-4262-8afb-cf71e45d1956/1461adb6-5183-4a48-8346-d14d7250302c/US-en-20240715-POP_SIGNUP_TWO_WEEKS-perspective_WEB_8b32f466-39f1-47d0-ade1-7bbf83666948_large.jpg';
+
+export const BRAND_NAME = 'Netflix';

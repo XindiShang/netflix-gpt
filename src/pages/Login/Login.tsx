@@ -8,6 +8,7 @@ import { loginSchema } from '@/lib/validation';
 import { useLoginQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import { type LoginBody } from '@/types/auth';
+import { BRAND_NAME } from '@/utils/constants';
 
 const Login = () => {
   const { setIsAuthenticated } = useAuthStore((state) => state);
@@ -25,35 +26,57 @@ const Login = () => {
   }, [isError]);
 
   const onSubmit: SubmitHandler<LoginBody> = async (data) => {
-    await login(data);
-    setIsAuthenticated(true);
+    try {
+      await login(data);
+      setIsAuthenticated(true);
+    } catch (error) {
+      const { message } = error as Error;
+      toast.error(message, { theme: 'colored' });
+    }
   };
 
   return (
-    <form
-      className="m-auto w-[90%] md:w-[30%]"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <p className="text-center text-sm mb-2">Username: user</p>
-      <p className="text-center text-sm mb-3">Password: user</p>
-      <Input
-        errors={errors}
-        placeholder="Username"
-        label="Username"
-        id="username"
-        register={register}
-        name="username"
-      />
-      <Input
-        errors={errors}
-        placeholder="Password"
-        label="Password"
-        type="password"
-        register={register}
-        name="password"
-      />
-      <Button text="Login" type="submit" isLoading={isLoading} />
-    </form>
+    <div className="sm:px-[68px] sm:max-w-[450px] sm:w-[450px] w-full sm:py-12 card sm:bg-black/70 min-h-[707px] rounded">
+      <h1 className="text-white card-title">Sign In</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="gap-4 px-0 card-body">
+          <Input
+            errors={errors}
+            placeholder="Email"
+            label="Email"
+            id="userLoginId"
+            register={register}
+            name="userLoginId"
+          />
+          <Input
+            errors={errors}
+            placeholder="Password"
+            label="Password"
+            type="password"
+            register={register}
+            name="password"
+          />
+        </div>
+
+        <div className="justify-center card-actions">
+          <Button
+            text="Sign In"
+            type="submit"
+            className="btn btn-block btn-primary"
+            isLoading={isLoading}
+          ></Button>
+        </div>
+      </form>
+
+      <div className="py-8">
+        <p className="text-base-300">
+          New to {BRAND_NAME}?{' '}
+          <a href="/signup" className="text-primary">
+            Sign up now.
+          </a>
+        </p>
+      </div>
+    </div>
   );
 };
 

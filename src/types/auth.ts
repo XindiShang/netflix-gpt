@@ -1,4 +1,4 @@
 export interface LoginBody {
-  username: string;
+  userLoginId: string;
   password: string;
 }

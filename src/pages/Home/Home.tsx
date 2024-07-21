@@ -8,10 +8,10 @@ import { HERO_BACKGROUND } from '@/utils/constants';
 
 const Home = () => {
   return (
-    <div className="relative z-0 flex flex-col min-h-screen overflow-hidden text-white bg-black">
+    <div className="relative z-0 flex flex-col w-full min-h-screen overflow-hidden bg-black">
       <Header />
-      {/* hero section */}
-      <div className="absolute top-0 left-0 w-full h-screen min-h-screen overflow-hidden opacity-50 -z-10">
+      {/* hero section md only */}
+      <div className="absolute top-0 left-0 hidden w-full h-screen min-h-screen overflow-hidden opacity-50 sm:block -z-10">
         {/* <div className="relative w-full h-full overflow-hidden"> */}
         <img
           className="object-cover min-w-full min-h-full"
@@ -23,10 +23,8 @@ const Home = () => {
         {/* </div> */}
       </div>
 
-      <div className="mb-14 max-w-[450px] mx-auto my-0 py-0 px-[5%]">
-        <div className="flex items-center justify-center">
-          <Login />
-        </div>
+      <div className="sm:mb-14 sm:mx-auto my-0 py-0 px-[5%] flex-1 grow">
+        <Login />
       </div>
     </div>
   );

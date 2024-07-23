@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/components/Button';
@@ -8,9 +9,9 @@ import { loginSchema } from '@/lib/validation';
 import { useLoginQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import { type LoginBody } from '@/types/auth';
-import { BRAND_NAME } from '@/utils/constants';
 
 const Login = () => {
+  const { t } = useTranslation();
   const { setIsAuthenticated } = useAuthStore((state) => state);
   const { isLoading, mutateAsync: login, isError, error } = useLoginQuery();
   const {
@@ -37,21 +38,21 @@ const Login = () => {
 
   return (
     <div className="sm:px-[68px] sm:max-w-[450px] sm:w-[450px] w-full sm:py-12 card sm:bg-black/70 min-h-[707px] rounded">
-      <h1 className="text-white card-title">Sign In</h1>
+      <h1 className="text-white card-title">{t('login.title')}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="gap-4 px-0 card-body">
           <Input
             errors={errors}
-            placeholder="Email"
-            label="Email"
+            placeholder={t('login.email')}
+            label={t('login.email')}
             id="userLoginId"
             register={register}
             name="userLoginId"
           />
           <Input
             errors={errors}
-            placeholder="Password"
-            label="Password"
+            placeholder={t('login.password')}
+            label={t('login.password')}
             type="password"
             register={register}
             name="password"
@@ -60,7 +61,7 @@ const Login = () => {
 
         <div className="justify-center card-actions">
           <Button
-            text="Sign In"
+            text={t('login.sign')}
             type="submit"
             className="btn btn-block btn-primary"
             isLoading={isLoading}
@@ -70,9 +71,9 @@ const Login = () => {
 
       <div className="py-8">
         <p className="text-base-300">
-          New to {BRAND_NAME}?{' '}
+          {t('login.new')}{' '}
           <a href="/signup" className="text-primary">
-            Sign up now.
+            {t('login.signup')}
           </a>
         </p>
       </div>

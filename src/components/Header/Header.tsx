@@ -1,11 +1,21 @@
+import { useTranslation } from 'react-i18next';
+import I18nIcon from '@/assets/icons/i18n.svg?react';
 import Button from '@/components/Button';
 import useAuthStore from '@/store/useAuthStore';
-import { LOGO } from '@/utils/constants';
+import type { Language } from '@/types/i18n';
+import { languageNames, LOGO } from '@/utils/constants';
 
 const Header = () => {
+  const { i18n } = useTranslation();
   const { isAuthenticated, setIsAuthenticated } = useAuthStore(
     (state) => state
   );
+
+  const currentLanguage = i18n.language as Language;
+
+  const changeLanguage = async (language: string) => {
+    await i18n.changeLanguage(language);
+  };
 
   return (
     <nav>
@@ -20,7 +30,34 @@ const Header = () => {
               />
             </a>
           </div>
-          <div className="items-center hidden space-x-3 md:flex ">
+          <div className="items-center hidden space-x-3 md:flex">
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="font-medium text-white btn btn-sm btn-secondary rounded-btn"
+              >
+                <I18nIcon className="w-6 h-6" />
+                <span>{`${languageNames[currentLanguage]}`}</span>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content text-white bg-secondary rounded-box z-[1] mt-4 w-52 p-2 shadow"
+              >
+                {Object.keys(languageNames).map((lng) => (
+                  <li key={lng}>
+                    <button
+                      className="bg-secondary hover:bg-slate-500/30 focus:text-white"
+                      onClick={async () => {
+                        await changeLanguage(lng);
+                      }}
+                    >
+                      {languageNames[lng as Language]}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <a
               href="https://github.com/akhil-neoito/react-query-zustand-ts-vite-boilerplate"
               className="px-2 py-2 font-medium text-white transition duration-300 bg-blue-500 rounded hover:bg-blue-400"

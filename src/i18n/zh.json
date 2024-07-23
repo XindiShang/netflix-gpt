@@ -1,0 +1,15 @@
+{
+  "language": "语言",
+  "netflix": "Netflix",
+  "login": {
+    "title": "登录",
+    "email": "邮箱",
+    "password": "密码",
+    "remember": "记住我",
+    "forgot": "忘记密码？",
+    "sign": "登录",
+    "new": "首次使用 Netflix？",
+    "signup": "现在注册。",
+    "terms": "此页面受 Google reCAPTCHA 保护，以确保您不是机器人。了解更多。"
+  }
+}

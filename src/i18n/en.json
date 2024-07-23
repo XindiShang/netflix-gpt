@@ -1,0 +1,15 @@
+{
+  "language": "English",
+  "netflix": "Netflix",
+  "login": {
+    "title": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "remember": "Remember me",
+    "forgot": "Forgot your password?",
+    "sign": "Sign In",
+    "new": "New to Netflix?",
+    "signup": "Sign up now.",
+    "terms": "This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more."
+  }
+}

@@ -40,7 +40,7 @@
             "^react",
             "^@?\\w",
             // Internal packages.
-            "^@/(components|enums|hooks|layouts|lib|models|pages|routes|services|store|types|assets|utils)(/.*|$)",
+            "^@/(components|enums|hooks|i18n|layouts|lib|models|pages|routes|services|store|types|assets|utils)(/.*|$)",
             // Side effect imports.
             "^\\u0000",
             // Parent imports. Put `..` last.

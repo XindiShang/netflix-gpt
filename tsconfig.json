@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["node", "jest"],
+    "types": ["node", "jest", "vite-plugin-svgr/client"],
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
@@ -25,7 +25,9 @@
       "@/hooks/*": ["hooks/*"],
       "@/store/*": ["store/*"],
       "@/services/*": ["services/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/i18n/*": ["i18n/*"],
+      "@/assets/*": ["assets/*"]
     }
   },
   "include": ["./src"]

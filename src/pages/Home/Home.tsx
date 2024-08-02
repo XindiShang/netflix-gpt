@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import Login from '@/pages/Login';
+import Auth from '@/pages/Auth';
 import { HERO_BACKGROUND } from '@/utils/constants';
 
 // 1. if use ONLY ONE background image, like below
@@ -24,7 +24,7 @@ const Home = () => {
       </div>
 
       <div className="sm:mb-14 sm:mx-auto my-0 py-0 px-[5%] flex-1 grow">
-        <Login />
+        <Auth />
       </div>
     </div>
   );

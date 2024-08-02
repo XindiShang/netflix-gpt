@@ -1,4 +1,11 @@
 export interface LoginBody {
-  userLoginId: string;
+  email: string;
   password: string;
+}
+
+export interface RegisterBody {
+  userName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }

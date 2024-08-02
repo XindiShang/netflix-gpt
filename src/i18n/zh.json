@@ -1,15 +1,29 @@
 {
   "language": "语言",
   "netflix": "Netflix",
-  "login": {
-    "title": "登录",
+  "auth": {
+    "loginTitle": "登录",
+    "loginAction": "登录",
+    "loginLink": "点此登录。",
     "email": "邮箱",
     "password": "密码",
     "remember": "记住我",
     "forgot": "忘记密码？",
-    "sign": "登录",
-    "new": "首次使用 Netflix？",
-    "signup": "现在注册。",
-    "terms": "此页面受 Google reCAPTCHA 保护，以确保您不是机器人。了解更多。"
+    "newUser": "首次使用 Netflix？",
+    "registerTitle": "注册",
+    "registerAction": "注册",
+    "registerLink": "现在注册。",
+    "userName": "用户名",
+    "confirmPassword": "确认密码",
+    "alreadyHaveAccount": "已有账号？",
+    "terms": "此页面受 Google reCAPTCHA 保护，以确保您不是机器人。",
+    "termsLink": " 了解更多。"
+  },
+  "validation": {
+    "emailRequired": "邮箱不能为空",
+    "passwordRequired": "密码不能为空",
+    "usernameRequired": "用户名不能为空",
+    "confirmPasswordRequired": "确认密码不能为空",
+    "passwordsMustMatch": "密码必须匹配"
   }
 }

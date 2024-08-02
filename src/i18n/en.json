@@ -1,15 +1,29 @@
 {
   "language": "English",
   "netflix": "Netflix",
-  "login": {
-    "title": "Sign In",
+  "auth": {
+    "loginTitle": "Sign In",
+    "loginAction": "Sign In",
+    "loginLink": "Sign in here.",
     "email": "Email",
     "password": "Password",
     "remember": "Remember me",
     "forgot": "Forgot your password?",
-    "sign": "Sign In",
-    "new": "New to Netflix?",
-    "signup": "Sign up now.",
-    "terms": "This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more."
+    "newUser": "New to Netflix?",
+    "registerTitle": "Sign Up",
+    "registerAction": "Sign Up",
+    "registerLink": "Sign up now.",
+    "userName": "Username",
+    "confirmPassword": "Confirm Password",
+    "alreadyHaveAccount": "Already have an account?",
+    "terms": "This page is protected by Google reCAPTCHA to ensure you're not a bot.",
+    "termsLink": "Learn more."
+  },
+  "validation": {
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "usernameRequired": "Username is required",
+    "confirmPasswordRequired": "Confirm Password is required",
+    "passwordsMustMatch": "Passwords must match"
   }
 }

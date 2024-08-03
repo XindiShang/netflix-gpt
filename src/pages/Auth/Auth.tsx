@@ -75,16 +75,13 @@ const Auth = () => {
 
   return (
     <div className="sm:px-[68px] sm:max-w-[450px] sm:w-[450px] w-full sm:py-12 card sm:bg-black/70 min-h-[707px] rounded">
-      <h1 className="text-white card-title">
-        {isLogin ? t('auth.loginTitle') : t('auth.registerTitle')}
-      </h1>
-
       {isLogin ? (
         <LoginForm
           onSubmit={handleLoginSubmit(handleLogin)}
           register={loginRegister}
           errors={loginErrors}
           isLoading={isLoginLoading}
+          toggleLogin={toggleLogin}
         />
       ) : (
         <RegisterForm
@@ -92,27 +89,9 @@ const Auth = () => {
           register={registerRegister}
           errors={registerErrors}
           isLoading={isRegisterLoading}
+          toggleLogin={toggleLogin}
         />
       )}
-
-      <div className="py-8">
-        <p className="text-base-300">
-          {isLogin ? t('auth.newUser') : t('auth.alreadyHaveAccount')}{' '}
-          <button
-            className="text-primary"
-            onClick={() => {
-              toggleLogin(!isLogin);
-            }}
-          >
-            {isLogin ? t('auth.registerLink') : t('auth.loginLink')}
-          </button>
-        </p>
-
-        <p className="mt-6 text-sm text-base-300">
-          {t('auth.terms')}
-          <button className="text-info">{t('auth.termsLink')}</button>
-        </p>
-      </div>
     </div>
   );
 };

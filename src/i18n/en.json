@@ -21,7 +21,12 @@
   },
   "validation": {
     "emailRequired": "Email is required",
+    "emailInvalid": "Email is invalid",
     "passwordRequired": "Password is required",
+    "passwordMin": "Password must be at least 8 characters long",
+    "passwordLetters": "Password must contain at least one letter",
+    "passwordNumbers": "Password must contain at least one number",
+    "passwordSpecial": "Password must contain at least one special character",
     "usernameRequired": "Username is required",
     "confirmPasswordRequired": "Confirm Password is required",
     "passwordsMustMatch": "Passwords must match"

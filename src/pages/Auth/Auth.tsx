@@ -33,15 +33,17 @@ const Auth = () => {
   const registerSchema = createRegisterSchema(t);
 
   const {
-    register: loginRegister,
+    register: loginFormRegister,
     handleSubmit: handleLoginSubmit,
     formState: { errors: loginErrors },
+    reset: resetLogin,
   } = useForm<LoginBody>({ resolver: yupResolver(loginSchema) });
 
   const {
-    register: registerRegister,
+    register: registerFormRegister,
     handleSubmit: handleRegisterSubmit,
     formState: { errors: registerErrors },
+    reset: resetRegister,
   } = useForm<RegisterBody>({ resolver: yupResolver(registerSchema) });
 
   useEffect(() => {
@@ -52,6 +54,11 @@ const Auth = () => {
       toast.error(registerError as string, { theme: 'colored' });
     }
   }, [isLoginError, isRegisterError]);
+
+  useEffect(() => {
+    // Clear form fields when switching between login and register forms
+    isLogin ? resetRegister() : resetLogin();
+  }, [isLogin]);
 
   const handleLogin: SubmitHandler<LoginBody> = async (data) => {
     try {
@@ -78,7 +85,7 @@ const Auth = () => {
       {isLogin ? (
         <LoginForm
           onSubmit={handleLoginSubmit(handleLogin)}
-          register={loginRegister}
+          register={loginFormRegister}
           errors={loginErrors}
           isLoading={isLoginLoading}
           toggleLogin={toggleLogin}
@@ -86,7 +93,7 @@ const Auth = () => {
       ) : (
         <RegisterForm
           onSubmit={handleRegisterSubmit(handleRegister)}
-          register={registerRegister}
+          register={registerFormRegister}
           errors={registerErrors}
           isLoading={isRegisterLoading}
           toggleLogin={toggleLogin}

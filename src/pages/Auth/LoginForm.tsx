@@ -31,7 +31,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <Input
             errors={errors}
             placeholder={t('auth.email')}
-            label={t('auth.email')}
+            // label={t('auth.email')}
             id="email"
             register={register}
             name="email"
@@ -39,7 +39,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <Input
             errors={errors}
             placeholder={t('auth.password')}
-            label={t('auth.password')}
+            // label={t('auth.password')}
             type="password"
             register={register}
             name="password"

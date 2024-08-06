@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getItem, setItem } from '@/lib/localStorage';
+import storage from '@/lib/localStorage';
 import { logger } from './logger';
 
 interface GlobalState {
@@ -11,7 +11,7 @@ export interface GlobalStore extends GlobalState {
 }
 
 const initialState: Pick<GlobalStore, keyof GlobalState> = {
-  isMenuOpen: getItem('isMenuOpen') ?? false,
+  isMenuOpen: storage.getItem('isMenuOpen') ?? false,
 };
 
 const useGlobalStore = create<GlobalStore>()(
@@ -20,7 +20,7 @@ const useGlobalStore = create<GlobalStore>()(
       ...initialState,
       toggleMenu: () => {
         set((state) => {
-          setItem('isMenuOpen', !state.isMenuOpen);
+          storage.setItem('isMenuOpen', !state.isMenuOpen);
           return { isMenuOpen: !state.isMenuOpen };
         });
       },

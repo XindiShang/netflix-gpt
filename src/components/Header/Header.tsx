@@ -7,9 +7,7 @@ import { languageNames, LOGO } from '@/utils/constants';
 
 const Header = () => {
   const { i18n } = useTranslation();
-  const { isAuthenticated, setIsAuthenticated } = useAuthStore(
-    (state) => state
-  );
+  const { isAuthenticated, clearAuthData } = useAuthStore((state) => state);
 
   const currentLanguage = i18n.language as Language;
 
@@ -76,12 +74,11 @@ const Header = () => {
               <Button
                 text="Logout"
                 className="px-3 py-3 text-xs font-medium text-white transition duration-300 bg-blue-500 rounded hover:bg-blue-400"
-                onClick={() => {
-                  setIsAuthenticated(false);
-                }}
+                onClick={clearAuthData}
               />
             )}
           </div>
+          {/* TODO: mobile menu, add menu items */}
           <div className="flex items-center md:hidden">
             <button className="outline-none mobile-menu-button">
               <svg

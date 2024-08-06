@@ -14,7 +14,7 @@ import RegisterForm from './RegisterForm';
 const Auth = () => {
   const { t } = useTranslation();
   const [isLogin, toggleLogin] = useToggle(true);
-  const { setIsAuthenticated } = useAuthStore((state) => state);
+  const { setAuthData } = useAuthStore((state) => state);
 
   const {
     isLoading: isLoginLoading,
@@ -62,8 +62,13 @@ const Auth = () => {
 
   const handleLogin: SubmitHandler<LoginBody> = async (data) => {
     try {
-      await login(data);
-      setIsAuthenticated(true);
+      const { uid, email, stsTokenManager } = await login(data);
+      const user = {
+        id: uid,
+        email,
+        // TODO: add name to local storage maybe?
+      };
+      setAuthData(user, stsTokenManager.accessToken);
     } catch (error) {
       const { message } = error as Error;
       toast.error(message, { theme: 'colored' });
@@ -72,8 +77,13 @@ const Auth = () => {
 
   const handleRegister: SubmitHandler<RegisterBody> = async (data) => {
     try {
-      await register(data);
-      setIsAuthenticated(true);
+      const { uid, email, stsTokenManager } = await register(data);
+      const user = {
+        id: uid,
+        email,
+        // TODO: add name to local storage maybe?
+      };
+      setAuthData(user, stsTokenManager.accessToken);
     } catch (error) {
       const { message } = error as Error;
       toast.error(message, { theme: 'colored' });

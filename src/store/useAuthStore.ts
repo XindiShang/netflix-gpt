@@ -8,6 +8,7 @@ interface User {
   id: string;
   email: string | null;
   name?: string | null;
+  avatar?: string | null;
 }
 
 interface AuthState {
@@ -69,6 +70,7 @@ onAuthStateChanged(auth, (firebaseUser) => {
             id: firebaseUser.uid,
             email: firebaseUser.email,
             name: firebaseUser.displayName,
+            avatar: firebaseUser.photoURL,
           },
           token,
         });

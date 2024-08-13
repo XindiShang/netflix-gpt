@@ -2,19 +2,11 @@ import { FirebaseError } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  type User as FirebaseUser,
+  updateProfile,
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase.config';
 import { type LoginBody, type RegisterBody } from '@/types/auth';
-
-// This is because the current version of Firebase excludes the stsTokenManager property in the User object.
-interface User extends FirebaseUser {
-  stsTokenManager: {
-    accessToken: string;
-    expirationTime: number;
-    refreshToken: string;
-  };
-}
+import { USER_AVATAR } from '@/utils/constants';
 
 // TODO: create a translation dictionary for error messages
 export const login = async (body: LoginBody) => {
@@ -24,7 +16,18 @@ export const login = async (body: LoginBody) => {
       body.email,
       body.password
     );
-    return userCredential.user as User;
+
+    const user = userCredential.user;
+
+    const token = await user.getIdToken(true);
+
+    return {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      token,
+    };
   } catch (error) {
     if (error instanceof FirebaseError) {
       throw new Error(`Firebase error (${error.code}): ${error.message}`);
@@ -41,7 +44,21 @@ export const register = async (body: RegisterBody) => {
       body.email,
       body.password
     );
-    return userCredential.user as User;
+
+    const user = userCredential.user;
+
+    await updateProfile(user, {
+      displayName: body.userName,
+      photoURL: USER_AVATAR,
+    });
+
+    const token = await user.getIdToken(true);
+
+    return {
+      ...user,
+      displayName: body.userName,
+      token,
+    };
   } catch (error) {
     if (error instanceof FirebaseError) {
       throw new Error(`Firebase error (${error.code}): ${error.message}`);

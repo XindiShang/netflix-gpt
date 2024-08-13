@@ -62,13 +62,14 @@ const Auth = () => {
 
   const handleLogin: SubmitHandler<LoginBody> = async (data) => {
     try {
-      const { uid, email, stsTokenManager } = await login(data);
+      const { uid, email, displayName, token, photoURL } = await login(data);
       const user = {
         id: uid,
         email,
-        // TODO: add name to local storage maybe?
+        name: displayName,
+        photoURL,
       };
-      setAuthData(user, stsTokenManager.accessToken);
+      setAuthData({ user, token });
     } catch (error) {
       const { message } = error as Error;
       toast.error(message, { theme: 'colored' });
@@ -77,13 +78,14 @@ const Auth = () => {
 
   const handleRegister: SubmitHandler<RegisterBody> = async (data) => {
     try {
-      const { uid, email, stsTokenManager } = await register(data);
+      const { uid, email, displayName, token, photoURL } = await register(data);
       const user = {
         id: uid,
         email,
-        // TODO: add name to local storage maybe?
+        name: displayName,
+        photoURL,
       };
-      setAuthData(user, stsTokenManager.accessToken);
+      setAuthData({ user, token });
     } catch (error) {
       const { message } = error as Error;
       toast.error(message, { theme: 'colored' });

@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { type LoginBody, type RegisterBody } from '@/types/auth';
-import { login, register } from '../api/auth.service';
+import { login, logout, register } from '../api/auth.service';
 
 export const useLoginQuery = () =>
   useMutation(['login'], async (body: LoginBody) => {
@@ -12,4 +12,9 @@ export const useRegisterQuery = () =>
   useMutation(['register'], async (body: RegisterBody) => {
     const res = await register(body);
     return res;
+  });
+
+export const useLogoutQuery = () =>
+  useMutation(['logout'], async () => {
+    await logout();
   });

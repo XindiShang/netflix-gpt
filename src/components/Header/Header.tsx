@@ -1,21 +1,47 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import I18nIcon from '@/assets/icons/i18n.svg?react';
+import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import type { Language } from '@/types/i18n';
 import { languageNames, LOGO } from '@/utils/constants';
 
-// TODO: 1. Sign out using firebase auth 2. Decide whether to use collapse menu
+// TODO: Decide whether to use collapse menu
 const Header = () => {
   const { i18n } = useTranslation();
   const { isAuthenticated, clearAuthData, user } = useAuthStore(
     (state) => state
   );
 
+  const {
+    isLoading: isLogoutLoading,
+    mutateAsync: logout,
+    isError: isLogoutError,
+    error: logoutError,
+  } = useLogoutQuery();
+
   const currentLanguage = i18n.language as Language;
 
   const changeLanguage = async (language: string) => {
     await i18n.changeLanguage(language);
   };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      clearAuthData();
+    } catch (error) {
+      const { message } = error as Error;
+      toast.error(message, { theme: 'colored' });
+    }
+  };
+
+  useEffect(() => {
+    if (isLogoutError) {
+      toast.error(logoutError as string, { theme: 'colored' });
+    }
+  }, [isLogoutError]);
 
   return (
     <nav>
@@ -121,9 +147,12 @@ const Header = () => {
                 <li>
                   <a
                     className="bg-secondary hover:bg-slate-500/30 hover:text-primary focus:!text-primary"
-                    onClick={clearAuthData}
+                    onClick={handleLogout}
                   >
                     Logout
+                    {isLogoutLoading && (
+                      <span className="self-end loading loading-spinner"></span>
+                    )}
                   </a>
                 </li>
               </ul>

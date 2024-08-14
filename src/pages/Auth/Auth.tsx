@@ -46,20 +46,6 @@ const Auth = () => {
     reset: resetRegister,
   } = useForm<RegisterBody>({ resolver: yupResolver(registerSchema) });
 
-  useEffect(() => {
-    if (isLoginError) {
-      toast.error(loginError as string, { theme: 'colored' });
-    }
-    if (isRegisterError) {
-      toast.error(registerError as string, { theme: 'colored' });
-    }
-  }, [isLoginError, isRegisterError]);
-
-  useEffect(() => {
-    // Clear form fields when switching between login and register forms
-    isLogin ? resetRegister() : resetLogin();
-  }, [isLogin]);
-
   const handleLogin: SubmitHandler<LoginBody> = async (data) => {
     try {
       const { uid, email, displayName, token, photoURL } = await login(data);
@@ -67,7 +53,7 @@ const Auth = () => {
         id: uid,
         email,
         name: displayName,
-        photoURL,
+        avatar: photoURL,
       };
       setAuthData({ user, token });
     } catch (error) {
@@ -83,7 +69,7 @@ const Auth = () => {
         id: uid,
         email,
         name: displayName,
-        photoURL,
+        avatar: photoURL,
       };
       setAuthData({ user, token });
     } catch (error) {
@@ -91,6 +77,20 @@ const Auth = () => {
       toast.error(message, { theme: 'colored' });
     }
   };
+
+  useEffect(() => {
+    if (isLoginError) {
+      toast.error(loginError as string, { theme: 'colored' });
+    }
+    if (isRegisterError) {
+      toast.error(registerError as string, { theme: 'colored' });
+    }
+  }, [isLoginError, isRegisterError]);
+
+  useEffect(() => {
+    // Clear form fields when switching between login and register forms
+    isLogin ? resetRegister() : resetLogin();
+  }, [isLogin]);
 
   return (
     <div className="sm:px-[68px] sm:max-w-[450px] sm:w-[450px] w-full sm:py-12 card sm:bg-black/70 min-h-[707px] rounded">

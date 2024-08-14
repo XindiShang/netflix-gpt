@@ -2,6 +2,7 @@ import { FirebaseError } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase.config';
@@ -22,10 +23,7 @@ export const login = async (body: LoginBody) => {
     const token = await user.getIdToken(true);
 
     return {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
+      ...user,
       token,
     };
   } catch (error) {
@@ -64,6 +62,18 @@ export const register = async (body: RegisterBody) => {
       throw new Error(`Firebase error (${error.code}): ${error.message}`);
     } else {
       throw new Error('An unknown error occurred during registration.');
+    }
+  }
+};
+
+export const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw new Error(`Firebase error (${error.code}): ${error.message}`);
+    } else {
+      throw new Error('An unknown error occurred during logout.');
     }
   }
 };

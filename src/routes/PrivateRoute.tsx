@@ -7,7 +7,6 @@ interface Props {
 }
 
 const PrivateRoute: React.FC<Props> = ({ children }) => {
-  // Replace with your auth condition
   const { isAuthenticated } = useAuthStore((state) => state);
 
   return isAuthenticated ? children : <Navigate to="/" />;

@@ -6,10 +6,10 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase.config';
+import { translateError } from '@/lib/i18nTranslator';
 import { type LoginBody, type RegisterBody } from '@/types/auth';
 import { USER_AVATAR } from '@/utils/constants';
 
-// TODO: create a translation dictionary for error messages
 export const login = async (body: LoginBody) => {
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -28,9 +28,10 @@ export const login = async (body: LoginBody) => {
     };
   } catch (error) {
     if (error instanceof FirebaseError) {
-      throw new Error(`Firebase error (${error.code}): ${error.message}`);
+      const errorMessage = translateError(error.code);
+      throw new Error(errorMessage);
     } else {
-      throw new Error('An unknown error occurred during login.');
+      throw new Error(translateError('auth/unknown-error'));
     }
   }
 };
@@ -59,9 +60,10 @@ export const register = async (body: RegisterBody) => {
     };
   } catch (error) {
     if (error instanceof FirebaseError) {
-      throw new Error(`Firebase error (${error.code}): ${error.message}`);
+      const errorMessage = translateError(error.code);
+      throw new Error(errorMessage);
     } else {
-      throw new Error('An unknown error occurred during registration.');
+      throw new Error(translateError('auth/unknown-error'));
     }
   }
 };
@@ -71,9 +73,10 @@ export const logout = async () => {
     await signOut(auth);
   } catch (error) {
     if (error instanceof FirebaseError) {
-      throw new Error(`Firebase error (${error.code}): ${error.message}`);
+      const errorMessage = translateError(error.code);
+      throw new Error(errorMessage);
     } else {
-      throw new Error('An unknown error occurred during logout.');
+      throw new Error(translateError('auth/unknown-error'));
     }
   }
 };

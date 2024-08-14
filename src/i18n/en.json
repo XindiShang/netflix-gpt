@@ -30,5 +30,16 @@
     "usernameRequired": "Username is required",
     "confirmPasswordRequired": "Confirm Password is required",
     "passwordsMustMatch": "Passwords must match"
+  },
+  "errors": {
+    "auth/invalid-email": "Invalid email address.",
+    "auth/user-disabled": "User account has been disabled.",
+    "auth/user-not-found": "No user account found.",
+    "auth/wrong-password": "Incorrect password.",
+    "auth/email-already-in-use": "Email address is already in use.",
+    "auth/weak-password": "The password is too weak.",
+    "auth/unknown-error": "An unknown error occurred.",
+    "auth/too-many-requests": "Too many requests. Try again later.",
+    "auth/invalid-credential": "Invalid login credentials."
   }
 }

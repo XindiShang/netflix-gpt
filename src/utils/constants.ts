@@ -12,6 +12,6 @@ export const USER_AVATAR =
 export const BRAND_NAME = 'Netflix';
 
 export const languageNames: Record<Language, string> = {
-  en: 'English',
-  zh: '简体中文',
+  'en-US': 'English',
+  'zh-CN': '简体中文',
 };

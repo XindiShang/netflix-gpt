@@ -3,7 +3,7 @@ import {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import storage from './localStorage';
+// import storage from './localStorage';
 
 export interface ConsoleError {
   status: number;
@@ -13,7 +13,8 @@ export interface ConsoleError {
 export const requestInterceptor = (
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-  const token = storage.getItem<string>('token');
+  // const token = storage.getItem<string>('token');
+  const token = import.meta.env.VITE_API_ACCESS_TOKEN;
   if (token) {
     config.headers.set('Authorization', `Bearer ${token}`);
   }

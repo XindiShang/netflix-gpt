@@ -9,7 +9,7 @@ export const getPopularMovies = async (
 ): Promise<GetPopularMoviesResponse> => {
   const { language, page } = params;
   const { data } = await api.get<GetPopularMoviesResponse>(
-    `https://api.themoviedb.org/3/movie/popular?language=${language}&page=${page}`
+    `/movie/popular?language=${language}&page=${page}`
   );
   return data;
 };

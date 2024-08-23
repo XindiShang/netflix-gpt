@@ -18,16 +18,17 @@ const Hero: React.FC<HeroProps> = ({
   description,
   onCtaClick,
 }) => {
-  const { setTrailerVideo, trailerVideo } = useMovieStore((state) => ({
-    setTrailerVideo: state.setTrailerVideo,
-    trailerVideo: state.trailerVideo,
-  }));
+  const { setTrailerVideo, trailerVideo } = useMovieStore();
+
+  // Only call the query if there's no trailer or the stored trailer key doesn't match the movieId.
+  const shouldFetchVideos =
+    !trailerVideo || trailerVideo.key !== movieId.toString();
 
   const {
     data: videoData,
     isLoading,
     isError,
-  } = useMovieVideosQuery({ id: movieId });
+  } = useMovieVideosQuery({ id: movieId }, { enabled: shouldFetchVideos });
 
   const trailer = useMemo(
     () => videoData?.results.find((video) => video.type === 'Trailer'),

@@ -47,5 +47,17 @@
     "description": "立即观看最新电影和节目。",
     "ctaLabel": "立即观看",
     "moreInfo": "更多信息"
+  },
+  "user": {
+    "profile": "个人资料",
+    "account": "账户",
+    "logOut": "退出登录"
+  },
+  "badges": {
+    "new": "新",
+    "comingSoon": "即将上映",
+    "exclusive": "独家",
+    "trending": "热门",
+    "popular": "流行"
   }
 }

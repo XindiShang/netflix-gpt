@@ -10,7 +10,7 @@ import { languageNames, LOGO } from '@/utils/constants';
 
 // TODO: Decide whether to use collapse menu
 const Header = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { isAuthenticated, clearAuthData, user } = useAuthStore(
     (state) => state
   );
@@ -142,8 +142,10 @@ const Header = () => {
               >
                 <li>
                   <a className="bg-secondary hover:bg-slate-500/30 hover:text-primary focus:!text-primary">
-                    Profile
-                    <span className="badge badge-primary">New</span>
+                    {t('user.profile')}
+                    <span className="badge badge-primary">
+                      {t('badges.new')}
+                    </span>
                   </a>
                 </li>
                 <li>
@@ -151,7 +153,7 @@ const Header = () => {
                     className="bg-secondary hover:bg-slate-500/30 hover:text-primary focus:!text-primary"
                     onClick={handleLogout}
                   >
-                    Logout
+                    {t('user.logOut')}
                     {isLogoutLoading && (
                       <span className="self-end loading loading-spinner"></span>
                     )}

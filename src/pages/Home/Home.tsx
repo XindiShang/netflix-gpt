@@ -23,7 +23,7 @@ const Home = () => {
         {/* </div> */}
       </div>
 
-      <div className="sm:mb-14 sm:mx-auto my-0 py-0 px-[5%] flex-1 grow">
+      <div className="sm:mb-14 sm:mx-auto mt-24 py-0 px-[5%] flex-1 grow">
         <Auth />
       </div>
     </div>

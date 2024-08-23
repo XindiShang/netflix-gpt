@@ -47,5 +47,16 @@
     "description": "Stream the latest movies and shows now.",
     "ctaLabel": "Watch Now",
     "moreInfo": "More Info"
+  },
+  "user": {
+    "profile": "Profile",
+    "account": "Account",
+    "logOut": "Logout"
+  },
+  "badges": {
+    "new": "New",
+    "comingSoon": "Coming Soon",
+    "exclusive": "Exclusive",
+    "trending": "Trending"
   }
 }

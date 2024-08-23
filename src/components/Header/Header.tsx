@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import I18nIcon from '@/assets/icons/i18n.svg?react';
+import { LanguageIcon } from '@heroicons/react/24/outline';
+// import I18nIcon from '@/assets/icons/i18n.svg?react';
 import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import type { Language } from '@/types/i18n';
@@ -44,8 +45,8 @@ const Header = () => {
   }, [isLogoutError]);
 
   return (
-    <nav>
-      <div className="navbar">
+    <nav className="absolute z-10 w-screen">
+      <div className="navbar md:px-24">
         <div className="navbar-start">
           <a href="/">
             <img
@@ -101,7 +102,8 @@ const Header = () => {
               role="button"
               className="font-medium !text-white btn btn-sm bg-secondary btn-outline rounded-btn"
             >
-              <I18nIcon className="w-6 h-6" />
+              {/* <I18nIcon className="w-6 h-6" /> */}
+              <LanguageIcon className="w-6 h-6" />
               <span>{`${languageNames[currentLanguage]}`}</span>
             </div>
             <ul

@@ -1,3 +1,14 @@
+export interface GetMovieListProps {
+  language?: string;
+  page: number;
+  region?: string;
+}
+
+export interface GetMovieProps {
+  id: number;
+  Language?: string;
+}
+
 export interface GetPopularMoviesResponse {
   page: number;
   results: Movie[];
@@ -5,10 +16,31 @@ export interface GetPopularMoviesResponse {
   total_results: number;
 }
 
-export interface GetPopularMoviesProps {
-  language: string;
+export interface GetNowPlayingMoviesResponse {
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
   page: number;
-  region?: string;
+  results: Movie[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface GetMovieVideosResponse {
+  id: number;
+  results: MovieVideo[];
+}
+
+export interface MovieVideo {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  site: string;
+  size: number;
+  type: string;
 }
 
 export interface Movie {

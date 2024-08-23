@@ -41,5 +41,11 @@
     "auth/unknown-error": "发生未知错误。",
     "auth/too-many-requests": "请求过多，请稍后再试。",
     "auth/invalid-credential": "登录凭证无效。"
+  },
+  "hero": {
+    "title": "观看最新电影",
+    "description": "立即观看最新电影和节目。",
+    "ctaLabel": "立即观看",
+    "moreInfo": "更多信息"
   }
 }

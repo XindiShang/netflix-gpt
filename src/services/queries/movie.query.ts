@@ -1,11 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import {
-  type GetPopularMoviesProps,
+  type GetMovieListProps,
+  type GetMovieProps,
+  type GetMovieVideosResponse,
   type GetPopularMoviesResponse,
 } from '@/types/movie';
-import { getPopularMovies } from '../api/movie.service';
+import {
+  getMovieVideos,
+  getPopularMovies,
+  getTopRatedMovies,
+} from '../api/movie.service';
 
-export const usePopularMoviesQuery = (params: GetPopularMoviesProps) =>
+export const usePopularMoviesQuery = (params: GetMovieListProps) =>
   useQuery<GetPopularMoviesResponse>(
     ['getPopularMovies', { params }],
     async () => {
@@ -13,3 +19,23 @@ export const usePopularMoviesQuery = (params: GetPopularMoviesProps) =>
       return res;
     }
   );
+
+export const useTopRatedMoviesQuery = (params: GetMovieListProps) =>
+  useQuery<GetPopularMoviesResponse>(
+    ['getTopRatedMovies', { params }],
+    async () => {
+      const res = await getTopRatedMovies(params);
+      return res;
+    }
+  );
+
+export const useMovieVideosQuery = (
+  params: GetMovieProps,
+  options?: UseQueryOptions<GetMovieVideosResponse>
+) => {
+  return useQuery<GetMovieVideosResponse>(
+    ['getMovieVideos', params],
+    async () => await getMovieVideos(params),
+    options
+  );
+};

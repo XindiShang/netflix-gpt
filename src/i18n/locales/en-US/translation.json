@@ -41,5 +41,11 @@
     "auth/unknown-error": "An unknown error occurred.",
     "auth/too-many-requests": "Too many requests. Try again later.",
     "auth/invalid-credential": "Invalid login credentials."
+  },
+  "hero": {
+    "title": "Watch the Latest Movies",
+    "description": "Stream the latest movies and shows now.",
+    "ctaLabel": "Watch Now",
+    "moreInfo": "More Info"
   }
 }

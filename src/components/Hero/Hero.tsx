@@ -50,7 +50,7 @@ const Hero: React.FC<HeroProps> = ({
   }
 
   const videoUrl = trailer
-    ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1`
+    ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&loop=1&playlist=${trailer.key}`
     : '';
 
   return (

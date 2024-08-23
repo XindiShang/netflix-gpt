@@ -15,7 +15,7 @@ const HeroContent: React.FC<HeroContentProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className="relative flex flex-col justify-end h-full p-8 px-6 bottom-[10%] text-white md:justify-center md:-bottom-[10%] just md:px-24">
+    <div className="absolute top-0 left-0 w-full h-full pt-[30%] md:pt-[15%] px-6 md:px-24 text-white">
       <h1 className="mb-4 text-2xl font-bold md:text-5xl">{title}</h1>
       <p className="hidden w-1/2 mb-8 text-lg md:inline-block">{description}</p>
       <div className="flex space-x-4">

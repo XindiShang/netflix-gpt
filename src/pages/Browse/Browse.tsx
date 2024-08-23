@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import { usePopularMoviesQuery } from '@/services/queries/movie.query';
 import { type Movie } from '@/types/movie';
 
+// TODO: organize query calls, separate into individual components or call them in the parent component
 const Browse = () => {
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
@@ -39,7 +40,7 @@ const Browse = () => {
   const firstMovie = popularMoviesData.results[0];
 
   return (
-    <div>
+    <>
       <Header />
       <Hero
         movieId={firstMovie.id}
@@ -54,7 +55,7 @@ const Browse = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

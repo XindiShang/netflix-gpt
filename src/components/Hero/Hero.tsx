@@ -49,13 +49,11 @@ const Hero: React.FC<HeroProps> = ({
     );
   }
 
-  const videoUrl = trailer
-    ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&loop=1&playlist=${trailer.key}`
-    : '';
+  const videoId = trailer?.key ?? '';
 
   return (
     <div className="relative w-screen aspect-square md:aspect-video">
-      <HeroVideoBackground videoUrl={videoUrl} />
+      <HeroVideoBackground videoId={videoId} />
       <HeroOverlay />
       <HeroContent
         title={title}

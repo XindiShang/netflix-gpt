@@ -1,19 +1,25 @@
+import React from 'react';
+import YouTube from 'react-youtube';
+
 interface HeroVideoBackgroundProps {
-  videoUrl: string;
+  videoId: string;
 }
 
 const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({
-  videoUrl,
+  videoId,
 }) => {
-  return (
-    <iframe
-      className="w-full h-full"
-      src={videoUrl}
-      title="YouTube video player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    />
-  );
+  const opts = {
+    height: '100%',
+    width: '100%',
+    playerVars: {
+      autoplay: 1,
+      mute: 1,
+      loop: 1,
+      playlist: videoId,
+    },
+  };
+
+  return <YouTube className="w-full h-full" videoId={videoId} opts={opts} />;
 };
 
 export default HeroVideoBackground;

@@ -3,8 +3,20 @@ import {
   type GetMovieListProps,
   type GetMovieProps,
   type GetMovieVideosResponse,
+  type GetNowPlayingMoviesResponse,
   type GetPopularMoviesResponse,
 } from '@/types/movie';
+
+export const getNowPlayingMovies = async (
+  params: GetMovieListProps
+): Promise<GetNowPlayingMoviesResponse> => {
+  const { language, page } = params;
+  const url = `/movie/now_playing?page=${page}${
+    language ? `&language=${language}` : ''
+  }`;
+  const { data } = await api.get<GetNowPlayingMoviesResponse>(url);
+  return data;
+};
 
 export const getPopularMovies = async (
   params: GetMovieListProps

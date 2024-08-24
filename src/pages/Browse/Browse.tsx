@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import { usePopularMoviesQuery } from '@/services/queries/movie.query';
-import { type Movie } from '@/types/movie';
+import MovieStack from '@/components/Movie';
+import { useNowPlayingMoviesQuery } from '@/services/queries/movie.query';
 
 // TODO: organize query calls, separate into individual components or call them in the parent component
 const Browse = () => {
@@ -16,9 +16,9 @@ const Browse = () => {
 
   const {
     isLoading: isLoadingMovies,
-    data: popularMoviesData,
+    data: nowPlayingMoviesData,
     isError: isMoviesError,
-  } = usePopularMoviesQuery(filters);
+  } = useNowPlayingMoviesQuery(filters);
 
   // TODO: i18n
   if (isMoviesError) {
@@ -33,11 +33,11 @@ const Browse = () => {
     );
   }
 
-  if (!popularMoviesData?.results.length) {
+  if (!nowPlayingMoviesData?.results.length) {
     return <p>No movies found</p>;
   }
 
-  const firstMovie = popularMoviesData.results[0];
+  const firstMovie = nowPlayingMoviesData.results[0];
 
   return (
     <>
@@ -48,13 +48,7 @@ const Browse = () => {
         description={firstMovie.overview}
         onCtaClick={() => {}}
       />
-      <div>
-        {popularMoviesData.results.map((movie: Movie) => (
-          <div key={movie.id}>
-            <h2>{movie.title}</h2>
-          </div>
-        ))}
-      </div>
+      <MovieStack />
     </>
   );
 };

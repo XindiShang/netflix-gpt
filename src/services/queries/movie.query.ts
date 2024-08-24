@@ -7,9 +7,19 @@ import {
 } from '@/types/movie';
 import {
   getMovieVideos,
+  getNowPlayingMovies,
   getPopularMovies,
   getTopRatedMovies,
 } from '../api/movie.service';
+
+export const useNowPlayingMoviesQuery = (params: GetMovieListProps) =>
+  useQuery<GetPopularMoviesResponse>(
+    ['getNowPlayingMovies', { params }],
+    async () => {
+      const res = await getNowPlayingMovies(params);
+      return res;
+    }
+  );
 
 export const usePopularMoviesQuery = (params: GetMovieListProps) =>
   useQuery<GetPopularMoviesResponse>(

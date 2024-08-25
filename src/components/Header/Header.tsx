@@ -6,7 +6,7 @@ import { LanguageIcon } from '@heroicons/react/24/outline';
 import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import type { Language } from '@/types/i18n';
-import { LOGO, supportedLanguages } from '@/utils/constants';
+import { LOGO, supportedLanguages, USER_AVATAR } from '@/utils/constants';
 
 // TODO: Decide whether to use collapse menu
 const Header = () => {
@@ -138,7 +138,7 @@ const Header = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src={user?.avatar as string} />
+                  <img src={(user?.avatar as string) || USER_AVATAR} />
                 </div>
               </label>
               <ul

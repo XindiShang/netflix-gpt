@@ -1,19 +1,21 @@
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import {
+  type GetDatedMovieListResponse,
   type GetMovieListProps,
+  type GetMovieListResponse,
   type GetMovieProps,
   type GetMovieVideosResponse,
-  type GetPopularMoviesResponse,
 } from '@/types/movie';
 import {
   getMovieVideos,
   getNowPlayingMovies,
   getPopularMovies,
   getTopRatedMovies,
+  getUpcomingMovies,
 } from '../api/movie.service';
 
 export const useNowPlayingMoviesQuery = (params: GetMovieListProps) =>
-  useQuery<GetPopularMoviesResponse>(
+  useQuery<GetDatedMovieListResponse>(
     ['getNowPlayingMovies', { params }],
     async () => {
       const res = await getNowPlayingMovies(params);
@@ -22,19 +24,25 @@ export const useNowPlayingMoviesQuery = (params: GetMovieListProps) =>
   );
 
 export const usePopularMoviesQuery = (params: GetMovieListProps) =>
-  useQuery<GetPopularMoviesResponse>(
-    ['getPopularMovies', { params }],
+  useQuery<GetMovieListResponse>(['getPopularMovies', { params }], async () => {
+    const res = await getPopularMovies(params);
+    return res;
+  });
+
+export const useTopRatedMoviesQuery = (params: GetMovieListProps) =>
+  useQuery<GetMovieListResponse>(
+    ['getTopRatedMovies', { params }],
     async () => {
-      const res = await getPopularMovies(params);
+      const res = await getTopRatedMovies(params);
       return res;
     }
   );
 
-export const useTopRatedMoviesQuery = (params: GetMovieListProps) =>
-  useQuery<GetPopularMoviesResponse>(
-    ['getTopRatedMovies', { params }],
+export const useUpcomingMoviesQuery = (params: GetMovieListProps) =>
+  useQuery<GetDatedMovieListResponse>(
+    ['getUpcomingMovies', { params }],
     async () => {
-      const res = await getTopRatedMovies(params);
+      const res = await getUpcomingMovies(params);
       return res;
     }
   );

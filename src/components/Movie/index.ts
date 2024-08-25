@@ -1,1 +1,1 @@
-export { default } from './MovieStack';
+export { default } from './MovieLists';

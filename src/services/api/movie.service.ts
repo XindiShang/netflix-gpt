@@ -1,42 +1,53 @@
 import { api } from '@/lib/api';
 import {
+  type GetDatedMovieListResponse,
   type GetMovieListProps,
+  type GetMovieListResponse,
   type GetMovieProps,
   type GetMovieVideosResponse,
-  type GetNowPlayingMoviesResponse,
-  type GetPopularMoviesResponse,
 } from '@/types/movie';
 
 export const getNowPlayingMovies = async (
   params: GetMovieListProps
-): Promise<GetNowPlayingMoviesResponse> => {
+): Promise<GetDatedMovieListResponse> => {
   const { language, page } = params;
   const url = `/movie/now_playing?page=${page}${
     language ? `&language=${language}` : ''
   }`;
-  const { data } = await api.get<GetNowPlayingMoviesResponse>(url);
+  const { data } = await api.get<GetDatedMovieListResponse>(url);
   return data;
 };
 
 export const getPopularMovies = async (
   params: GetMovieListProps
-): Promise<GetPopularMoviesResponse> => {
+): Promise<GetMovieListResponse> => {
   const { language, page } = params;
   const url = `/movie/popular?page=${page}${
     language ? `&language=${language}` : ''
   }`;
-  const { data } = await api.get<GetPopularMoviesResponse>(url);
+  const { data } = await api.get<GetMovieListResponse>(url);
   return data;
 };
 
 export const getTopRatedMovies = async (
   params: GetMovieListProps
-): Promise<GetPopularMoviesResponse> => {
+): Promise<GetMovieListResponse> => {
   const { language, page } = params;
   const url = `/movie/top_rated?page=${page}${
     language ? `&language=${language}` : ''
   }`;
-  const { data } = await api.get<GetPopularMoviesResponse>(url);
+  const { data } = await api.get<GetMovieListResponse>(url);
+  return data;
+};
+
+export const getUpcomingMovies = async (
+  params: GetMovieListProps
+): Promise<GetDatedMovieListResponse> => {
+  const { language, page } = params;
+  const url = `/movie/upcoming?page=${page}${
+    language ? `&language=${language}` : ''
+  }`;
+  const { data } = await api.get<GetDatedMovieListResponse>(url);
   return data;
 };
 

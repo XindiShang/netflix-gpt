@@ -6,7 +6,7 @@ import { LanguageIcon } from '@heroicons/react/24/outline';
 import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import type { Language } from '@/types/i18n';
-import { languageNames, LOGO } from '@/utils/constants';
+import { LOGO, supportedLanguages } from '@/utils/constants';
 
 // TODO: Decide whether to use collapse menu
 const Header = () => {
@@ -45,7 +45,7 @@ const Header = () => {
   }, [isLogoutError]);
 
   return (
-    <nav className="absolute z-10 w-screen">
+    <nav className="absolute z-10 w-full">
       <div className="navbar md:px-24">
         <div className="navbar-start">
           <a href="/">
@@ -104,25 +104,30 @@ const Header = () => {
             >
               {/* <I18nIcon className="w-6 h-6" /> */}
               <LanguageIcon className="w-6 h-6" />
-              <span>{`${languageNames[currentLanguage]}`}</span>
+              <span>
+                {
+                  supportedLanguages.find(
+                    (lang) => lang.identifier === currentLanguage
+                  )?.name
+                }
+              </span>
             </div>
             <ul
               tabIndex={0}
               className="menu dropdown-content text-white bg-secondary border-white border rounded-box z-[1] mt-4 w-52 p-2 shadow"
             >
-              {Object.keys(languageNames).map((lng) => (
-                <li key={lng}>
+              {supportedLanguages.map(({ identifier, name }) => (
+                <li key={identifier}>
                   <button
                     className="bg-secondary hover:bg-slate-500/30 hover:text-primary focus:!text-primary"
                     onClick={async () => {
-                      await changeLanguage(lng);
+                      await changeLanguage(identifier);
                     }}
                   >
-                    {/* set checked if current language */}
                     <span className="w-4 text-center">
-                      {currentLanguage === lng ? '✔' : ''}
+                      {currentLanguage === identifier ? '✔' : ''}
                     </span>
-                    {languageNames[lng as Language]}
+                    {name}
                   </button>
                 </li>
               ))}

@@ -52,7 +52,7 @@ const Hero: React.FC<HeroProps> = ({
   const videoId = trailer?.key ?? '';
 
   return (
-    <div className="relative w-screen aspect-square md:aspect-video">
+    <div className="relative w-full aspect-square md:aspect-video">
       <HeroVideoBackground videoId={videoId} />
       <HeroOverlay />
       <HeroContent

@@ -1,4 +1,5 @@
 import daisyui from 'daisyui';
+import tailwindScrollbar from 'tailwind-scrollbar';
 
 // eslint-disable-next-line no-undef
 module.exports = {
@@ -6,7 +7,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [daisyui],
+  plugins: [daisyui, tailwindScrollbar],
   daisyui: {
     themes: [
       {

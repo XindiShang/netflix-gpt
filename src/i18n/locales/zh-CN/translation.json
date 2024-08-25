@@ -42,16 +42,34 @@
     "auth/too-many-requests": "请求过多，请稍后再试。",
     "auth/invalid-credential": "登录凭证无效。"
   },
+  "user": {
+    "profile": "个人资料",
+    "account": "账户",
+    "logOut": "退出登录"
+  },
   "hero": {
     "title": "观看最新电影",
     "description": "立即观看最新电影和节目。",
     "ctaLabel": "立即观看",
     "moreInfo": "更多信息"
   },
-  "user": {
-    "profile": "个人资料",
-    "account": "账户",
-    "logOut": "退出登录"
+  "movie": {
+    "nowPlaying": "正在热映",
+    "topRated": "最受欢迎",
+    "popular": "流行",
+    "upcoming": "即将上映",
+    "details": "电影详情",
+    "overview": "概览",
+    "releaseDate": "上映日期",
+    "duration": "时长",
+    "genre": "类型",
+    "cast": "演员",
+    "director": "导演",
+    "viewTrailer": "观看预告片",
+    "watchNow": "立即观看",
+    "noMovies": "未找到电影",
+    "noMovieDetails": "未找到电影详情",
+    "error": "抱歉，出现了一些问题。请稍后再试。"
   },
   "badges": {
     "new": "新",

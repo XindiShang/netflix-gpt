@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { auth } from '@/lib/firebase.config';
 import storage from '@/lib/localStorage';
 import { logger } from './logger';
+import useGptStore from './useGptStore';
 
 interface User {
   id: string;
@@ -47,6 +48,9 @@ const useAuthStore = create<AuthStore>()(
         set({ user, token, isAuthenticated: true });
       },
       clearAuthData: () => {
+        const { reset } = useGptStore.getState();
+        reset();
+
         storage.removeItem('user');
         storage.removeItem('token');
         set({ user: null, token: null, isAuthenticated: false });

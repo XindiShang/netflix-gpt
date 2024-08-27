@@ -37,3 +37,9 @@ export const createRegisterSchema = (t: TFunction) => {
       .oneOf([yup.ref('password')], t('validation.passwordsMustMatch')),
   });
 };
+
+export const createGptSchema = (t: TFunction) => {
+  return yup.object().shape({
+    search: yup.string().required(t('validation.searchRequired')),
+  });
+};

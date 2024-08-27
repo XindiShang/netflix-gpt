@@ -13,6 +13,7 @@ export interface Props<T extends FieldValues = FieldValues>
   label?: string;
   labelClassName?: string;
   inputClassName?: string;
+  wrapperClassName?: string;
   disabled?: boolean;
   register: UseFormRegister<T>;
   errors?: FieldErrors<T>;
@@ -27,12 +28,13 @@ const Input = <T extends FieldValues>({
   register,
   labelClassName = 'text-white/70',
   inputClassName = '',
+  wrapperClassName = 'w-full form-control',
   ...rest
 }: Props<T>) => {
   const error = errors?.[name];
 
   return (
-    <div className="w-full form-control">
+    <div className={wrapperClassName}>
       {label && (
         <label className="label" htmlFor={name}>
           <span className={`label-text ${labelClassName}`}>{label}</span>

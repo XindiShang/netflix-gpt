@@ -11,7 +11,7 @@ export interface GetMovieProps {
 
 export interface GetMovieListResponse {
   page: number;
-  results: Movie[];
+  results: Movie[] | [];
   total_pages: number;
   total_results: number;
 }
@@ -28,6 +28,15 @@ export interface GetMovieVideosResponse {
   results: MovieVideo[];
 }
 
+export interface SearchMovieProps {
+  query: string;
+  include_adult?: boolean;
+  language?: string;
+  primary_release_year?: number;
+  page?: number;
+  region?: string;
+  year?: string;
+}
 export interface MovieVideo {
   id: string;
   iso_639_1: string;

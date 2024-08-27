@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { LanguageIcon } from '@heroicons/react/24/outline';
+import { LanguageIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 // import I18nIcon from '@/assets/icons/i18n.svg?react';
 import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
+import useGptStore from '@/store/useGptStore';
 import type { Language } from '@/types/i18n';
 import { LOGO, supportedLanguages, USER_AVATAR } from '@/utils/constants';
 
 // TODO: Decide whether to use collapse menu
 const Header = () => {
   const { i18n, t } = useTranslation();
-  const { isAuthenticated, clearAuthData, user } = useAuthStore(
-    (state) => state
-  );
+  const { isAuthenticated, clearAuthData, user } = useAuthStore();
+  const { toggleGpt } = useGptStore();
 
   const {
     isLoading: isLogoutLoading,
@@ -96,6 +96,15 @@ const Header = () => {
 
         {/* Add hidden if use collapse menu */}
         <div className="items-center space-x-3 navbar-end lg:flex">
+          {/* GPT Search */}
+          <button
+            onClick={toggleGpt}
+            className="text-white btn btn-circle btn-ghost"
+          >
+            <MagnifyingGlassIcon className="w-6 h-6" />
+          </button>
+
+          {/* Language Switcher */}
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -134,6 +143,7 @@ const Header = () => {
             </ul>
           </div>
 
+          {/* User Avatar */}
           {isAuthenticated && (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

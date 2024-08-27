@@ -1,19 +1,23 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import GptSection from '@/components/GPT';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import MovieLists from '@/components/Movie';
+import MovieSection from '@/components/Movie';
 import {
   useNowPlayingMoviesQuery,
   usePopularMoviesQuery,
   useTopRatedMoviesQuery,
   useUpcomingMoviesQuery,
 } from '@/services/queries/movie.query';
+import useGptStore from '@/store/useGptStore';
 
 // TODO: organize query calls, separate into individual components or call them in the parent component
 const Browse = () => {
   const { i18n, t } = useTranslation();
   const currentLanguage = i18n.language;
+
+  const { isGptEnabled } = useGptStore();
 
   const filters = useMemo(
     () => ({
@@ -24,10 +28,10 @@ const Browse = () => {
   );
 
   const queries = [
-    useNowPlayingMoviesQuery(filters),
-    usePopularMoviesQuery(filters),
-    useTopRatedMoviesQuery(filters),
-    useUpcomingMoviesQuery(filters),
+    useNowPlayingMoviesQuery(filters, { enabled: !isGptEnabled }),
+    usePopularMoviesQuery(filters, { enabled: !isGptEnabled }),
+    useTopRatedMoviesQuery(filters, { enabled: !isGptEnabled }),
+    useUpcomingMoviesQuery(filters, { enabled: !isGptEnabled }),
   ];
 
   const isLoading = queries.some((query) => query.isLoading);
@@ -61,18 +65,24 @@ const Browse = () => {
   return (
     <>
       <Header />
-      <Hero
-        movieId={firstMovie.id}
-        title={firstMovie.title}
-        description={firstMovie.overview}
-        onCtaClick={() => {}}
-      />
-      <MovieLists
-        nowPlaying={nowPlayingMoviesData.results}
-        topRated={topRatedMoviesData?.results}
-        popular={popularMoviesData?.results}
-        upcoming={upcomingMoviesData?.results}
-      />
+      {isGptEnabled ? (
+        <GptSection />
+      ) : (
+        <>
+          <Hero
+            movieId={firstMovie.id}
+            title={firstMovie.title}
+            description={firstMovie.overview}
+            onCtaClick={() => {}}
+          />
+          <MovieSection
+            nowPlaying={nowPlayingMoviesData.results}
+            topRated={topRatedMoviesData?.results}
+            popular={popularMoviesData?.results}
+            upcoming={upcomingMoviesData?.results}
+          />
+        </>
+      )}
     </>
   );
 };

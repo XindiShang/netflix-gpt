@@ -29,7 +29,8 @@
     "passwordSpecial": "Password must contain at least one special character",
     "usernameRequired": "Username is required",
     "confirmPasswordRequired": "Confirm Password is required",
-    "passwordsMustMatch": "Passwords must match"
+    "passwordsMustMatch": "Passwords must match",
+    "searchRequired": "Search is required"
   },
   "errors": {
     "auth/invalid-email": "Invalid email address.",
@@ -70,6 +71,11 @@
     "noMovies": "No movies found",
     "noMovieDetails": "No movie details found",
     "error": "Something went wrong. Please try again later."
+  },
+  "gpt": {
+    "searchPlaceholder": "Search for movies",
+    "searchAction": "Search",
+    "error": "Something went wrong. We couldn't find any movies matching your search."
   },
   "badges": {
     "new": "New",

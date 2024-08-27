@@ -5,6 +5,7 @@ import {
   type GetMovieListResponse,
   type GetMovieProps,
   type GetMovieVideosResponse,
+  type SearchMovieProps,
 } from '@/types/movie';
 
 export const getNowPlayingMovies = async (
@@ -56,5 +57,24 @@ export const getMovieVideos = async (
 ): Promise<GetMovieVideosResponse> => {
   const { id } = params;
   const { data } = await api.get<GetMovieVideosResponse>(`/movie/${id}/videos`);
+  return data;
+};
+
+export const searchMovies = async (
+  params: SearchMovieProps
+): Promise<GetMovieListResponse> => {
+  const { query, ...optionalParams } = params;
+
+  const urlParams = new URLSearchParams({ query });
+
+  Object.entries(optionalParams).forEach(([key, value]) => {
+    if (value !== undefined) {
+      urlParams.append(key, value.toString());
+    }
+  });
+
+  const url = `/search/movie?${urlParams.toString()}`;
+
+  const { data } = await api.get<GetMovieListResponse>(url);
   return data;
 };

@@ -36,3 +36,8 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+.btn-primary:is(.btn-disabled, [disabled], :disabled) {
+  background-color: #92161c !important;
+
+}

@@ -73,9 +73,11 @@
     "error": "抱歉，出现了一些问题。请稍后再试。"
   },
   "gpt": {
-    "searchPlaceholder": "搜索电影",
+    "searchPlaceholder": "问问AI有什么推荐的电影（例如：适合儿童的动画片）",
     "searchAction": "搜索",
-    "error": "出现了一些问题。我们找不到与您的搜索匹配的电影。"
+    "error": "出现了一些问题。我们找不到与您的搜索匹配的电影。",
+    "noResults": "未找到结果。尝试搜索其他内容。",
+    "explore": "探索电影"
   },
   "badges": {
     "new": "新",

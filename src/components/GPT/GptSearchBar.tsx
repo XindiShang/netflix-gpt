@@ -17,7 +17,7 @@ const GptSearchBar = () => {
   const currentLanguage = i18n.language;
 
   const [isLoading, toggleLoading] = useToggle(false);
-  const { isGptEnabled, setTitlesAndResults } = useGptStore();
+  const { isGptEnabled, setTitlesAndResults, setSearchError } = useGptStore();
 
   const gptSchema = createGptSchema(t);
 
@@ -30,8 +30,9 @@ const GptSearchBar = () => {
 
   const onSubmit = async (data: GptBody) => {
     toggleLoading(true);
+    setSearchError(false);
     try {
-      const gptQuery = generateGptQuery(data.search);
+      const gptQuery = generateGptQuery(data.search, currentLanguage);
       const chatCompletion = await aiClient.chat.completions.create({
         messages: [{ role: 'user', content: gptQuery }],
         model: 'llama3-8b-8192',
@@ -43,6 +44,7 @@ const GptSearchBar = () => {
         !content ||
         SENSITIVE_CONTENT_KEYWORDS.some((keyword) => content.includes(keyword))
       ) {
+        setSearchError(true);
         toast.error(t('gpt.error'));
         return;
       }
@@ -51,9 +53,6 @@ const GptSearchBar = () => {
       const searchResults = await fetchMovieData(movieTitles, currentLanguage);
 
       setTitlesAndResults({ titles: movieTitles, results: searchResults });
-
-      console.log('movieTitles', movieTitles);
-      console.log('searchResults', searchResults);
     } catch (error) {
       console.error('Error during GPT search:', error);
     } finally {
@@ -80,17 +79,19 @@ const GptSearchBar = () => {
           type="submit"
           className="col-span-2 px-4 py-2 m-2 text-white rounded-lg btn btn-primary"
           isLoading={isLoading}
+          disabled={isLoading}
         />
       </form>
     </div>
   );
 };
 
-const generateGptQuery = (searchTerm: string) => `
+const generateGptQuery = (searchTerm: string, responseLanguage: string) => `
   Act as a movie recommendation system. Suggest movies similar to "${searchTerm}". 
-  Provide only the names of 5 movies, separated by commas, without any additional text or formatting. 
+  Provide only the names of 5 movies, separated by ",", using language "${responseLanguage}", without any additional text or formatting. 
   Example format: Shiddat, 12th Fail, Mr. Robot, The Shawshank Redemption, Spirited Away.
   Remember, do not include any introduction or explanations, just the movie titles separated by commas.
+  If you have any concerns or questions, just respond with "I cannot provide that information".
 `;
 
 const fetchMovieData = async (

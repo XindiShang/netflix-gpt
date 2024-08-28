@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { LanguageIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-// import I18nIcon from '@/assets/icons/i18n.svg?react';
+import {
+  HomeIcon,
+  LanguageIcon,
+  MagnifyingGlassIcon,
+} from '@heroicons/react/24/outline';
 import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import useGptStore from '@/store/useGptStore';
@@ -13,7 +16,7 @@ import { LOGO, supportedLanguages, USER_AVATAR } from '@/utils/constants';
 const Header = () => {
   const { i18n, t } = useTranslation();
   const { isAuthenticated, clearAuthData, user } = useAuthStore();
-  const { toggleGpt } = useGptStore();
+  const { toggleGpt, isGptEnabled } = useGptStore();
 
   const {
     isLoading: isLogoutLoading,
@@ -97,12 +100,18 @@ const Header = () => {
         {/* Add hidden if use collapse menu */}
         <div className="items-center space-x-3 navbar-end lg:flex">
           {/* GPT Search */}
-          <button
-            onClick={toggleGpt}
-            className="text-white btn btn-circle btn-ghost"
-          >
-            <MagnifyingGlassIcon className="w-6 h-6" />
-          </button>
+          {isAuthenticated && (
+            <button
+              onClick={toggleGpt}
+              className="text-white btn btn-circle btn-ghost"
+            >
+              {isGptEnabled ? (
+                <HomeIcon className="w-6 h-6" />
+              ) : (
+                <MagnifyingGlassIcon className="w-6 h-6" />
+              )}
+            </button>
+          )}
 
           {/* Language Switcher */}
           <div className="dropdown dropdown-end">
@@ -111,7 +120,6 @@ const Header = () => {
               role="button"
               className="font-medium !text-white btn btn-sm bg-secondary btn-outline rounded-btn"
             >
-              {/* <I18nIcon className="w-6 h-6" /> */}
               <LanguageIcon className="w-6 h-6" />
               <span>
                 {

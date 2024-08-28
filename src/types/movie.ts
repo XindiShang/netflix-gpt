@@ -11,7 +11,7 @@ export interface GetMovieProps {
 
 export interface GetMovieListResponse {
   page: number;
-  results: Movie[] | [];
+  results: Movie[];
   total_pages: number;
   total_results: number;
 }

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import GptSection from '@/components/GPT';
-import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import MovieSection from '@/components/Movie';
 import {
@@ -12,11 +11,9 @@ import {
 } from '@/services/queries/movie.query';
 import useGptStore from '@/store/useGptStore';
 
-// TODO: organize query calls, separate into individual components or call them in the parent component
 const Browse = () => {
   const { i18n, t } = useTranslation();
   const currentLanguage = i18n.language;
-
   const { isGptEnabled } = useGptStore();
 
   const filters = useMemo(
@@ -27,21 +24,33 @@ const Browse = () => {
     [currentLanguage]
   );
 
-  const queries = [
-    useNowPlayingMoviesQuery(filters, { enabled: !isGptEnabled }),
-    usePopularMoviesQuery(filters, { enabled: !isGptEnabled }),
-    useTopRatedMoviesQuery(filters, { enabled: !isGptEnabled }),
-    useUpcomingMoviesQuery(filters, { enabled: !isGptEnabled }),
-  ];
+  const nowPlayingQuery = useNowPlayingMoviesQuery(filters, {
+    enabled: !isGptEnabled,
+  });
+  const popularMoviesQuery = usePopularMoviesQuery(filters, {
+    enabled: !isGptEnabled,
+  });
+  const topRatedMoviesQuery = useTopRatedMoviesQuery(filters, {
+    enabled: !isGptEnabled,
+  });
+  const upcomingMoviesQuery = useUpcomingMoviesQuery(filters, {
+    enabled: !isGptEnabled,
+  });
 
-  const isLoading = queries.some((query) => query.isLoading);
-  const isError = queries.some((query) => query.isError);
-
-  if (isError) {
-    return <p>{t('movie.error')}</p>;
+  if (isGptEnabled) {
+    return (
+      <>
+        <GptSection />
+      </>
+    );
   }
 
-  if (isLoading) {
+  if (
+    nowPlayingQuery.isLoading ||
+    popularMoviesQuery.isLoading ||
+    topRatedMoviesQuery.isLoading ||
+    upcomingMoviesQuery.isLoading
+  ) {
     return (
       <div className="flex items-center justify-center w-full h-screen bg-gradient-to-b from-black to-black/80">
         <div className="loading loading-spinner text-primary"></div>
@@ -49,12 +58,19 @@ const Browse = () => {
     );
   }
 
-  const [
-    nowPlayingMoviesData,
-    popularMoviesData,
-    topRatedMoviesData,
-    upcomingMoviesData,
-  ] = queries.map((query) => query.data);
+  if (
+    nowPlayingQuery.isError ||
+    popularMoviesQuery.isError ||
+    topRatedMoviesQuery.isError ||
+    upcomingMoviesQuery.isError
+  ) {
+    return <p>{t('movie.error')}</p>;
+  }
+
+  const nowPlayingMoviesData = nowPlayingQuery.data;
+  const popularMoviesData = popularMoviesQuery.data;
+  const topRatedMoviesData = topRatedMoviesQuery.data;
+  const upcomingMoviesData = upcomingMoviesQuery.data;
 
   if (!nowPlayingMoviesData?.results.length) {
     return <p>{t('movie.noMovies')}</p>;
@@ -64,25 +80,18 @@ const Browse = () => {
 
   return (
     <>
-      <Header />
-      {isGptEnabled ? (
-        <GptSection />
-      ) : (
-        <>
-          <Hero
-            movieId={firstMovie.id}
-            title={firstMovie.title}
-            description={firstMovie.overview}
-            onCtaClick={() => {}}
-          />
-          <MovieSection
-            nowPlaying={nowPlayingMoviesData.results}
-            topRated={topRatedMoviesData?.results}
-            popular={popularMoviesData?.results}
-            upcoming={upcomingMoviesData?.results}
-          />
-        </>
-      )}
+      <Hero
+        movieId={firstMovie.id}
+        title={firstMovie.title}
+        description={firstMovie.overview}
+        onCtaClick={() => {}}
+      />
+      <MovieSection
+        nowPlaying={nowPlayingMoviesData.results}
+        topRated={topRatedMoviesData?.results}
+        popular={popularMoviesData?.results}
+        upcoming={upcomingMoviesData?.results}
+      />
     </>
   );
 };

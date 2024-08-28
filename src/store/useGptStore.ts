@@ -3,8 +3,9 @@ import { type Movie } from '@/types/movie';
 
 interface GPTState {
   isGptEnabled: boolean;
+  isSearchError: boolean;
   recommendedMovieTitles: string[];
-  movieSearchResults: Movie[][] | Array<[]>;
+  movieSearchResults: Movie[][];
 }
 
 interface GPTStore extends GPTState {
@@ -13,11 +14,13 @@ interface GPTStore extends GPTState {
     titles: string[];
     results: Movie[][];
   }) => void;
+  setSearchError: (value: boolean) => void;
   reset: () => void;
 }
 
 const useGptStore = create<GPTStore>((set) => ({
   isGptEnabled: false,
+  isSearchError: false,
   recommendedMovieTitles: [],
   movieSearchResults: [],
   toggleGpt: () => {
@@ -26,11 +29,15 @@ const useGptStore = create<GPTStore>((set) => ({
   setTitlesAndResults: ({ titles, results }) => {
     set({ recommendedMovieTitles: titles, movieSearchResults: results });
   },
+  setSearchError: (value) => {
+    set({ isSearchError: value });
+  },
   reset: () => {
     set({
       recommendedMovieTitles: [],
       movieSearchResults: [],
       isGptEnabled: false,
+      isSearchError: false,
     });
   },
 }));

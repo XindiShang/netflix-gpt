@@ -73,9 +73,11 @@
     "error": "Something went wrong. Please try again later."
   },
   "gpt": {
-    "searchPlaceholder": "Search for movies",
+    "searchPlaceholder": "Ask AI what to watch next (e.g., animated films for kids)",
     "searchAction": "Search",
-    "error": "Something went wrong. We couldn't find any movies matching your search."
+    "error": "Something went wrong. We couldn't find any movies matching your search.",
+    "noResults": "No results found. Try searching for something else.",
+    "explore": "Explore movies"
   },
   "badges": {
     "new": "New",

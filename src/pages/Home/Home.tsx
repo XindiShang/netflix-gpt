@@ -1,4 +1,3 @@
-import Header from '@/components/Header';
 import Auth from '@/pages/Auth';
 import { HERO_BACKGROUND } from '@/utils/constants';
 
@@ -9,7 +8,6 @@ import { HERO_BACKGROUND } from '@/utils/constants';
 const Home = () => {
   return (
     <div className="relative z-0 flex flex-col w-full min-h-screen overflow-hidden bg-black">
-      <Header />
       {/* hero section md only */}
       <div className="absolute top-0 left-0 hidden w-full h-screen min-h-screen overflow-hidden opacity-50 sm:block -z-10">
         {/* <div className="relative w-full h-full overflow-hidden"> */}

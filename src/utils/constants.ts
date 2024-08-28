@@ -31,7 +31,4 @@ export const supportedLanguages: SupportedLanguage[] = [
   },
 ];
 
-export const SENSITIVE_CONTENT_KEYWORDS = [
-  'explicit content',
-  'cannot provide',
-];
+export const SENSITIVE_CONTENT_KEYWORDS = ['explicit content', 'I cannot'];

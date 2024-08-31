@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Articles from '../pages/Articles';
 import Browse from '../pages/Browse';
 import Home from '../pages/Home';
+import Movie from '../pages/Movie';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
@@ -31,6 +32,14 @@ const Router = () => (
         element={
           <PrivateRoute>
             <Browse />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/movie/:id"
+        element={
+          <PrivateRoute>
+            <Movie />
           </PrivateRoute>
         }
       />

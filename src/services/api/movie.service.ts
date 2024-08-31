@@ -5,6 +5,7 @@ import {
   type GetMovieListResponse,
   type GetMovieProps,
   type GetMovieVideosResponse,
+  type MovieDetails,
   type SearchMovieProps,
 } from '@/types/movie';
 
@@ -57,6 +58,15 @@ export const getMovieVideos = async (
 ): Promise<GetMovieVideosResponse> => {
   const { id } = params;
   const { data } = await api.get<GetMovieVideosResponse>(`/movie/${id}/videos`);
+  return data;
+};
+
+export const getMovieDetails = async (
+  params: GetMovieProps
+): Promise<MovieDetails> => {
+  const { id, language } = params;
+  const url = `/movie/${id}${language ? `?language=${language}` : ''}`;
+  const { data } = await api.get<MovieDetails>(url);
   return data;
 };
 

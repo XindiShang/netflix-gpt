@@ -6,6 +6,7 @@ import {
   LanguageIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
+// import { useWindowScroll } from "@uidotdev/usehooks";
 import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import useGptStore from '@/store/useGptStore';
@@ -15,6 +16,8 @@ import { LOGO, supportedLanguages, USER_AVATAR } from '@/utils/constants';
 // TODO: Decide whether to use collapse menu
 const Header = () => {
   const { i18n, t } = useTranslation();
+  // const [{ y }] = useWindowScroll();
+
   const { isAuthenticated, clearAuthData, user } = useAuthStore();
   const { toggleGpt, isGptEnabled } = useGptStore();
 
@@ -30,6 +33,8 @@ const Header = () => {
   const changeLanguage = async (language: string) => {
     await i18n.changeLanguage(language);
   };
+
+  // const headerBgClass = y && y > 50 ? 'bg-black' : 'bg-transparent';
 
   const handleLogout = async () => {
     try {
@@ -48,6 +53,7 @@ const Header = () => {
   }, [isLogoutError]);
 
   return (
+    // <nav className={`sticky top-0 z-10 w-full backdrop-blur-md ${headerBgClass}`}>
     <nav className="absolute z-10 w-full">
       <div className="navbar md:px-24">
         <div className="navbar-start">
@@ -118,10 +124,10 @@ const Header = () => {
             <div
               tabIndex={0}
               role="button"
-              className="font-medium !text-white btn btn-sm bg-secondary btn-outline rounded-btn"
+              className="font-medium !text-white btn btn-sm bg-secondary btn-outline rounded-btn flex-nowrap"
             >
               <LanguageIcon className="w-6 h-6" />
-              <span>
+              <span className="w-10 overflow-hidden md:w-auto whitespace-nowrap text-ellipsis">
                 {
                   supportedLanguages.find(
                     (lang) => lang.identifier === currentLanguage

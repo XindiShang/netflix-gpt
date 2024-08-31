@@ -5,9 +5,11 @@ import {
   type GetMovieListResponse,
   type GetMovieProps,
   type GetMovieVideosResponse,
+  type MovieDetails,
   type SearchMovieProps,
 } from '@/types/movie';
 import {
+  getMovieDetails,
   getMovieVideos,
   getNowPlayingMovies,
   getPopularMovies,
@@ -74,6 +76,17 @@ export const useMovieVideosQuery = (
   return useQuery<GetMovieVideosResponse>(
     ['getMovieVideos', params],
     async () => await getMovieVideos(params),
+    options
+  );
+};
+
+export const useMovieDetailsQuery = (
+  params: GetMovieProps,
+  options?: UseQueryOptions<MovieDetails>
+) => {
+  return useQuery<MovieDetails>(
+    ['getMovieDetails', params],
+    async () => await getMovieDetails(params),
     options
   );
 };

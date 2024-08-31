@@ -3,7 +3,7 @@ import { useMovieVideosQuery } from '@/services/queries/movie.query';
 import useMovieStore from '@/store/useMovieStore';
 import HeroContent from './HeroContent';
 import HeroOverlay from './HeroOverlay';
-import HeroVideoBackground from './HeroVideoBackground';
+import VideoPlayer from './VideoPlayer';
 
 interface HeroProps {
   movieId: number;
@@ -53,7 +53,7 @@ const Hero: React.FC<HeroProps> = ({
 
   return (
     <div className="relative w-full aspect-square md:aspect-video">
-      <HeroVideoBackground videoId={videoId} />
+      <VideoPlayer videoId={videoId} />
       <HeroOverlay />
       <HeroContent
         title={title}

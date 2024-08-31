@@ -9,7 +9,7 @@ function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="h-screen font-mono App">
+      <div className="h-screen font-mono bg-black">
         <Router />
       </div>
       <ToastContainer />

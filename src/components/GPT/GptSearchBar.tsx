@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useToggle } from '@uidotdev/usehooks';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import aiClient from '@/lib/groqAI';
@@ -16,8 +15,13 @@ const GptSearchBar = () => {
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language;
 
-  const [isLoading, toggleLoading] = useToggle(false);
-  const { isGptEnabled, setTitlesAndResults, setSearchError } = useGptStore();
+  const {
+    isGptEnabled,
+    isSearching,
+    setTitlesAndResults,
+    setSearchError,
+    setSearching,
+  } = useGptStore();
 
   const gptSchema = createGptSchema(t);
 
@@ -29,7 +33,7 @@ const GptSearchBar = () => {
   } = useForm<GptBody>({ resolver: yupResolver(gptSchema) });
 
   const onSubmit = async (data: GptBody) => {
-    toggleLoading(true);
+    setSearching(true);
     setSearchError(false);
     try {
       const gptQuery = generateGptQuery(data.search, currentLanguage);
@@ -56,7 +60,7 @@ const GptSearchBar = () => {
     } catch (error) {
       console.error('Error during GPT search:', error);
     } finally {
-      toggleLoading(false);
+      setSearching(false);
       !isGptEnabled && reset();
     }
   };
@@ -78,8 +82,8 @@ const GptSearchBar = () => {
           text={t('gpt.searchAction')}
           type="submit"
           className="col-span-2 px-4 py-2 m-2 text-white rounded-lg btn btn-primary"
-          isLoading={isLoading}
-          disabled={isLoading}
+          isLoading={isSearching}
+          disabled={isSearching}
         />
       </form>
     </div>

@@ -5,10 +5,21 @@ import MovieList from '@/components/Movie/MovieList';
 import useGptStore from '@/store/useGptStore';
 
 const GptSuggestions = () => {
-  const { recommendedMovieTitles, movieSearchResults, isSearchError } =
-    useGptStore();
+  const {
+    recommendedMovieTitles,
+    movieSearchResults,
+    isSearchError,
+    isSearching,
+  } = useGptStore();
 
   const { t } = useTranslation();
+
+  if (isSearching)
+    return (
+      <div className="flex items-center justify-center h-full p-4 text-white bg-black rounded-lg bg-opacity-90">
+        <div className="loading loading-spinner text-primary"></div>
+      </div>
+    );
 
   if (isSearchError)
     return (

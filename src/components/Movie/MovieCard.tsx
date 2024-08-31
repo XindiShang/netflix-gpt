@@ -17,6 +17,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
     <div ref={ref} className="w-36 md:w-48">
       {inView && (
+        // TODO: Add a fallback image
         <img
           src={`${IMG_CDN_URL}${movie.poster_path}`}
           alt={movie.title}

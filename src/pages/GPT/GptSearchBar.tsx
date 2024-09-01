@@ -15,13 +15,8 @@ const GptSearchBar = () => {
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language;
 
-  const {
-    isGptEnabled,
-    isSearching,
-    setTitlesAndResults,
-    setSearchError,
-    setSearching,
-  } = useGptStore();
+  const { isSearching, setTitlesAndResults, setSearchError, setSearching } =
+    useGptStore();
 
   const gptSchema = createGptSchema(t);
 
@@ -29,7 +24,7 @@ const GptSearchBar = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    // reset,
   } = useForm<GptBody>({ resolver: yupResolver(gptSchema) });
 
   const onSubmit = async (data: GptBody) => {
@@ -44,16 +39,13 @@ const GptSearchBar = () => {
 
       const content = chatCompletion.choices?.[0].message.content;
 
-      if (
-        !content ||
-        SENSITIVE_CONTENT_KEYWORDS.some((keyword) => content.includes(keyword))
-      ) {
+      if (!content || isSensitiveContent(content, SENSITIVE_CONTENT_KEYWORDS)) {
         setSearchError(true);
         toast.error(t('gpt.error'));
         return;
       }
 
-      const movieTitles = content.split(',').map((movie) => movie.trim());
+      const movieTitles = content.split(' | ').map((movie) => movie.trim());
       const searchResults = await fetchMovieData(movieTitles, currentLanguage);
 
       setTitlesAndResults({ titles: movieTitles, results: searchResults });
@@ -61,7 +53,6 @@ const GptSearchBar = () => {
       console.error('Error during GPT search:', error);
     } finally {
       setSearching(false);
-      !isGptEnabled && reset();
     }
   };
 
@@ -92,11 +83,16 @@ const GptSearchBar = () => {
 
 const generateGptQuery = (searchTerm: string, responseLanguage: string) => `
   Act as a movie recommendation system. Suggest movies similar to "${searchTerm}". 
-  Provide only the names of 5 movies, separated by ",", using language "${responseLanguage}", without any additional text or formatting. 
-  Example format: Shiddat, 12th Fail, Mr. Robot, The Shawshank Redemption, Spirited Away.
-  Remember, do not include any introduction or explanations, just the movie titles separated by commas.
+  Provide only the names of 5 movies, separated by a *pipe* (" | "), not by any other punctuation mark, 
+  using language "${responseLanguage}", without any additional text or formatting. 
+  Example format: Shiddat | 12th Fail | Mr. Robot | The Shawshank Redemption | Spirited Away.
+  Remember, do not include any introduction or explanations, just the movie titles separated by pipes.
   If you have any concerns or questions, just respond with "I cannot provide that information".
 `;
+
+const isSensitiveContent = (content: string, keywords: string[]) => {
+  return keywords.some((keyword) => new RegExp(keyword, 'i').test(content));
+};
 
 const fetchMovieData = async (
   movieTitles: string[],

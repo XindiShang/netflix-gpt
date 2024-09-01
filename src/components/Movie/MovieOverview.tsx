@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
+import { formatMoney } from '@/lib/helper';
 import { type MovieDetails } from '@/types/movie';
 
-// TODO: i18n
 const MovieOverview = ({ movieDetails }: { movieDetails?: MovieDetails }) => {
+  const { t } = useTranslation();
+
   if (!movieDetails) {
     return (
       <div className="flex items-center justify-center h-full p-4 text-white bg-black rounded-lg bg-opacity-90">
@@ -16,64 +19,127 @@ const MovieOverview = ({ movieDetails }: { movieDetails?: MovieDetails }) => {
     budget,
     genres,
     overview,
-    popularity,
+    runtime,
     release_date,
     revenue,
     vote_average,
-    vote_count,
+    popularity,
   } = movieDetails;
   /* eslint-enable @typescript-eslint/naming-convention */
 
+  const styleValue: React.CSSProperties & Record<string, string | number> = {
+    '--value': (popularity / 5000) * 100,
+  };
+
+  const voteAverageEmoji =
+    vote_average >= 7 ? '👍' : vote_average >= 4 ? '👌' : '👎';
+
   return (
-    <div className="h-screen p-4 m-4 overflow-x-hidden text-white bg-gray-900 border rounded-lg border-b-white">
-      <h1 className="mb-4 text-xl font-bold text-center md:text-2xl">
-        About this Movie
+    <div className="h-screen p-6 mx-4 overflow-x-hidden text-white rounded-lg shadow-xl bg-neutral glass">
+      <h1 className="mb-8 text-2xl font-bold text-center md:text-3xl">
+        {t('movie.details')}
       </h1>
-      <div className="flex flex-col gap-4 md:grid md:grid-cols-2">
-        <div>
-          <h2 className="text-lg font-semibold md:text-xl">Name:</h2>
-          <p>{title}</p>
-          <h2 className="mt-4 text-lg font-semibold md:text-xl">Overview:</h2>
-          <p>{overview}</p>
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-4">
+          <div>
+            <h2 className="mb-2 text-lg font-semibold md:text-xl">
+              {t('movie.name')}:
+            </h2>
+            <p>{title}</p>
+          </div>
+          <div>
+            <h2 className="mb-2 text-lg font-semibold md:text-xl">
+              {t('movie.overview')}:
+            </h2>
+            <p>{overview}</p>
+          </div>
         </div>
 
-        <div>
-          <h2 className="text-lg font-semibold md:text-xl">Budget:</h2>
-          <p>${budget / 1000000} million</p>
-          <h2 className="mt-4 text-lg font-semibold md:text-xl">Revenue:</h2>
-          <p>${revenue / 1000000} million</p>
+        <div className="space-y-4">
+          <div>
+            <h2 className="mb-2 text-lg font-semibold md:text-xl">
+              {t('movie.budget')}:
+            </h2>
+            <p>
+              ${formatMoney(budget)} {t('movie.million')}
+            </p>
+          </div>
+          <div>
+            <h2 className="mb-2 text-lg font-semibold md:text-xl">
+              {t('movie.revenue')}:
+            </h2>
+            <p>
+              ${formatMoney(revenue)} {t('movie.million')}
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mt-6">
-        <div>
-          <h2 className="text-lg font-semibold md:text-xl">Popularity:</h2>
-          <p>{popularity}</p>
-          <h2 className="mt-4 text-lg font-semibold md:text-xl">
-            Release Date:
+      <div className="grid gap-8 mt-8 md:grid-cols-2">
+        <div className="space-y-4">
+          <div>
+            <h2 className="mb-2 text-lg font-semibold md:text-xl">
+              {t('movie.duration')}:
+            </h2>
+            <p>
+              {runtime} {t('movie.runtime')}
+            </p>
+          </div>
+          <div>
+            <h2 className="mb-2 text-lg font-semibold md:text-xl">
+              {t('movie.releaseDate')}:
+            </h2>
+            <p>{release_date}</p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <h2 className="mb-2 text-lg font-semibold md:text-xl">
+              {t('movie.voteAverage')}:
+            </h2>
+            <div className="flex items-center space-x-2">
+              <span>{vote_average.toFixed(1)}</span>
+              <span>{voteAverageEmoji}</span>
+            </div>
+          </div>
+          <div>
+            <h2 className="mb-2 text-lg font-semibold md:text-xl">
+              {t('movie.popularity')}:
+            </h2>
+            <div
+              className={`bg-black border-4 border-black radial-progress ${
+                popularity >= 4000
+                  ? 'text-green-500'
+                  : popularity >= 2000
+                  ? 'text-yellow-500'
+                  : 'text-red-500'
+              }`}
+              style={styleValue}
+              role="progressbar"
+            >
+              {Math.round((popularity / 5000) * 100)}%
+            </div>
+          </div>
+        </div>
+
+        <div className="col-span-2">
+          <h2 className="mb-2 text-lg font-semibold md:text-xl">
+            {t('movie.genres')}:
           </h2>
-          <p>{release_date}</p>
-        </div>
-
-        <div>
-          <h2 className="text-lg font-semibold md:text-xl">Average Votes:</h2>
-          <p>{vote_average}</p>
-          <h2 className="mt-4 text-lg font-semibold md:text-xl">Vote Count:</h2>
-          <p>{vote_count}</p>
-        </div>
-
-        <div>
-          <h2 className="text-lg font-semibold md:text-xl">Genres: </h2>
           {genres && genres.length > 0 ? (
-            <ul className="space-x-2">
+            <ul className="flex flex-wrap gap-2">
               {genres.map((genre, index) => (
-                <li className="badge" key={index}>
+                <li
+                  className="px-3 py-1 text-sm font-medium text-black bg-white rounded-lg"
+                  key={index}
+                >
                   {genre.name}
                 </li>
               ))}
             </ul>
           ) : (
-            <p>No genres available</p>
+            <p>{t('movie.noGenres')}</p>
           )}
         </div>
       </div>

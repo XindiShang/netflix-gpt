@@ -15,23 +15,23 @@ const MoviePage = () => {
     // isError,
   } = useMovieDetailsQuery({ id: Number(id), language: currentLanguage });
 
-  return (
-    <div className="relative flex flex-col w-full h-full gap-4 mt-auto overflow-x-hidden bg-black top-16 md:gap-0 md:flex-row md:top-20">
-      {isLoading ? (
-        <div className="flex items-center justify-center w-full h-full p-4 text-white bg-black rounded-lg bg-opacity-90">
-          <div className="loading loading-spinner text-primary"></div>
-        </div>
-      ) : (
-        <>
-          <div className="flex-1 h-1/2 md:h-full">
-            <MovieTrailer />
-          </div>
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center w-full h-screen bg-black">
+        <div className="loading loading-spinner text-primary"></div>
+      </div>
+    );
+  }
 
-          <div className="flex-1 h-1/2 md:h-full">
-            <MovieOverview movieDetails={data} />
-          </div>
-        </>
-      )}
+  return (
+    <div className="relative flex flex-col w-full h-full min-h-screen gap-4 overflow-x-hidden bg-black top-16 md:gap-0 md:flex-row md:top-20">
+      <div className="flex-1 h-1/2 md:h-full">
+        <MovieTrailer />
+      </div>
+
+      <div className="flex-1 h-1/2 md:h-full">
+        <MovieOverview movieDetails={data} />
+      </div>
     </div>
   );
 };

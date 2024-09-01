@@ -7,3 +7,8 @@ export const formatDate = (date: Date | string): string => {
     minute: 'numeric',
   });
 };
+
+export const formatMoney = (value: number) => {
+  const millions = value / 1000000;
+  return millions % 1 === 0 ? millions : millions.toFixed(2);
+};

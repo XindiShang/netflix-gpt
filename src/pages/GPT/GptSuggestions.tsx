@@ -16,14 +16,14 @@ const GptSuggestions = () => {
 
   if (isSearching)
     return (
-      <div className="flex items-center justify-center h-full p-4 text-white bg-black rounded-lg bg-opacity-90">
+      <div className="flex items-center justify-center h-screen p-4 text-white bg-black rounded-lg bg-opacity-90">
         <div className="loading loading-spinner text-primary"></div>
       </div>
     );
 
   if (isSearchError)
     return (
-      <div className="flex flex-col items-center justify-center h-full gap-4 p-4 text-white bg-black rounded-lg bg-opacity-90">
+      <div className="flex flex-col items-center justify-center h-screen gap-4 p-4 text-white bg-black rounded-lg bg-opacity-90">
         <NotFoundIcon />
         <p>{t('gpt.noResults')}</p>
       </div>
@@ -31,14 +31,14 @@ const GptSuggestions = () => {
 
   if (recommendedMovieTitles.length === 0)
     return (
-      <div className="flex flex-col items-center justify-center h-full gap-4 p-4 text-white bg-black rounded-lg bg-opacity-90">
+      <div className="flex flex-col items-center justify-center h-screen gap-4 p-4 text-white bg-black rounded-lg bg-opacity-90">
         <ExploreIcon />
         <p>{t('gpt.explore')}</p>
       </div>
     );
 
   return (
-    <div className="h-full p-4 text-white bg-black rounded-lg bg-opacity-90">
+    <div className="min-h-screen p-4 text-white bg-black rounded-lg bg-opacity-90">
       <div>
         {recommendedMovieTitles.map((movieName, index) => (
           <MovieList

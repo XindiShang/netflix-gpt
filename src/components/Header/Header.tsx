@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   HomeIcon,
@@ -9,17 +10,16 @@ import {
 // import { useWindowScroll } from "@uidotdev/usehooks";
 import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
-import useGptStore from '@/store/useGptStore';
 import type { Language } from '@/types/i18n';
 import { LOGO, supportedLanguages, USER_AVATAR } from '@/utils/constants';
 
 // TODO: Decide whether to use collapse menu
 const Header = () => {
   const { i18n, t } = useTranslation();
+  const { pathname } = useLocation();
   // const [{ y }] = useWindowScroll();
 
   const { isAuthenticated, clearAuthData, user } = useAuthStore();
-  const { toggleGpt, isGptEnabled } = useGptStore();
 
   const {
     isLoading: isLogoutLoading,
@@ -54,7 +54,7 @@ const Header = () => {
 
   return (
     // <nav className={`sticky top-0 z-10 w-full backdrop-blur-md ${headerBgClass}`}>
-    <nav className="absolute z-10 w-full">
+    <nav className="absolute z-20 w-full">
       <div className="navbar md:px-24">
         <div className="navbar-start">
           <a href="/">
@@ -107,16 +107,15 @@ const Header = () => {
         <div className="items-center space-x-3 navbar-end lg:flex">
           {/* GPT Search */}
           {isAuthenticated && (
-            <button
-              onClick={toggleGpt}
-              className="text-white btn btn-circle btn-ghost"
-            >
-              {isGptEnabled ? (
-                <HomeIcon className="w-6 h-6" />
-              ) : (
-                <MagnifyingGlassIcon className="w-6 h-6" />
-              )}
-            </button>
+            <Link to={pathname === '/search' ? '/' : '/search'}>
+              <button className="text-white btn btn-circle btn-ghost">
+                {pathname === '/search' ? (
+                  <HomeIcon className="w-6 h-6" />
+                ) : (
+                  <MagnifyingGlassIcon className="w-6 h-6" />
+                )}
+              </button>
+            </Link>
           )}
 
           {/* Language Switcher */}

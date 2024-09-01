@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from '@/components/Header';
 import Articles from '../pages/Articles';
 import Browse from '../pages/Browse';
+import GPT from '../pages/GPT';
 import Home from '../pages/Home';
 import Movie from '../pages/Movie';
 import PrivateRoute from './PrivateRoute';
@@ -32,6 +33,14 @@ const Router = () => (
         element={
           <PrivateRoute>
             <Browse />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <PrivateRoute>
+            <GPT />
           </PrivateRoute>
         }
       />

@@ -33,7 +33,7 @@ const MovieTrailer = () => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-screen">
       {trailer && (
         <div className="">
           <VideoPlayer

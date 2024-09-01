@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { type Movie } from '@/types/movie';
 
 interface GPTState {
-  isGptEnabled: boolean;
   isSearchError: boolean;
   isSearching: boolean;
   recommendedMovieTitles: string[];
@@ -10,7 +9,6 @@ interface GPTState {
 }
 
 interface GPTStore extends GPTState {
-  toggleGpt: () => void;
   setTitlesAndResults: (payload: {
     titles: string[];
     results: Movie[][];
@@ -21,14 +19,10 @@ interface GPTStore extends GPTState {
 }
 
 const useGptStore = create<GPTStore>((set) => ({
-  isGptEnabled: false,
   isSearchError: false,
   isSearching: false,
   recommendedMovieTitles: [],
   movieSearchResults: [],
-  toggleGpt: () => {
-    set((state) => ({ isGptEnabled: !state.isGptEnabled }));
-  },
   setTitlesAndResults: ({ titles, results }) => {
     set({ recommendedMovieTitles: titles, movieSearchResults: results });
   },
@@ -42,7 +36,6 @@ const useGptStore = create<GPTStore>((set) => ({
     set({
       recommendedMovieTitles: [],
       movieSearchResults: [],
-      isGptEnabled: false,
       isSearchError: false,
       isSearching: false,
     });

@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import GptSection from '@/components/GPT';
 import Hero from '@/components/Hero';
 import MovieSection from '@/components/Movie';
 import {
@@ -9,12 +8,10 @@ import {
   useTopRatedMoviesQuery,
   useUpcomingMoviesQuery,
 } from '@/services/queries/movie.query';
-import useGptStore from '@/store/useGptStore';
 
 const Browse = () => {
   const { i18n, t } = useTranslation();
   const currentLanguage = i18n.language;
-  const { isGptEnabled } = useGptStore();
 
   const filters = useMemo(
     () => ({
@@ -24,26 +21,10 @@ const Browse = () => {
     [currentLanguage]
   );
 
-  const nowPlayingQuery = useNowPlayingMoviesQuery(filters, {
-    enabled: !isGptEnabled,
-  });
-  const popularMoviesQuery = usePopularMoviesQuery(filters, {
-    enabled: !isGptEnabled,
-  });
-  const topRatedMoviesQuery = useTopRatedMoviesQuery(filters, {
-    enabled: !isGptEnabled,
-  });
-  const upcomingMoviesQuery = useUpcomingMoviesQuery(filters, {
-    enabled: !isGptEnabled,
-  });
-
-  if (isGptEnabled) {
-    return (
-      <>
-        <GptSection />
-      </>
-    );
-  }
+  const nowPlayingQuery = useNowPlayingMoviesQuery(filters);
+  const popularMoviesQuery = usePopularMoviesQuery(filters);
+  const topRatedMoviesQuery = useTopRatedMoviesQuery(filters);
+  const upcomingMoviesQuery = useUpcomingMoviesQuery(filters);
 
   if (
     nowPlayingQuery.isLoading ||

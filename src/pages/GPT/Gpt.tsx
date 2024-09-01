@@ -1,4 +1,3 @@
-import React from 'react';
 import { BG_URL } from '@/utils/constants';
 import GptSearchBar from './GptSearchBar';
 import GptSuggestions from './GptSuggestions';
@@ -6,14 +5,14 @@ import GptSuggestions from './GptSuggestions';
 const Gpt = () => {
   return (
     <div className="h-full">
-      <div className="fixed -z-10">
+      <div className="fixed">
         <img
           className="object-cover h-screen md:object-none md:w-screen"
           src={BG_URL}
           alt="background_image"
         />
       </div>
-      <div className="flex flex-col h-full">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="flex-shrink-0">
           <GptSearchBar />
         </div>

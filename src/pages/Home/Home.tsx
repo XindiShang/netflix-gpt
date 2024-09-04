@@ -1,5 +1,5 @@
+import { HERO_BACKGROUND } from '@/lib/constants';
 import Auth from '@/pages/Auth';
-import { HERO_BACKGROUND } from '@/utils/constants';
 
 // 1. if use ONLY ONE background image, like below
 // 2. if use multiple background images and place them from top to bottom

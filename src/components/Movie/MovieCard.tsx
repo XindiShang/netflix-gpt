@@ -1,6 +1,6 @@
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
-import { IMG_CDN_URL } from '@/utils/constants';
+import { FALLBACK_IMG_URL, IMG_CDN_URL } from '@/lib/constants';
 
 interface MovieCardProps {
   movie: {
@@ -19,11 +19,13 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
     <div ref={ref} className="w-36 md:w-48">
       {inView && (
         <Link to={`/movie/${movie.id}`}>
-          {/* TODO: Add a fallback image */}
           <img
             src={`${IMG_CDN_URL}${movie.poster_path}`}
             alt={movie.title}
             className="object-cover w-full h-full"
+            onError={(e) => {
+              e.currentTarget.src = FALLBACK_IMG_URL;
+            }}
           />
         </Link>
       )}

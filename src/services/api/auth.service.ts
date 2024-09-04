@@ -5,10 +5,10 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import { USER_AVATAR } from '@/lib/constants';
 import { auth } from '@/lib/firebase.config';
 import { translateError } from '@/lib/i18nTranslator';
 import { type LoginBody, type RegisterBody } from '@/types/auth';
-import { USER_AVATAR } from '@/utils/constants';
 
 export const login = async (body: LoginBody) => {
   try {

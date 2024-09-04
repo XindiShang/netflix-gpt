@@ -10,9 +10,9 @@ export const PWAConfig: Partial<VitePWAOptions> = {
     'apple-touch-icon.png',
   ],
   manifest: {
-    name: 'React Query Zustand Boilerplate',
-    short_name: 'boilerplate',
-    description: 'Boilerplate with React, Zustand, and Vite',
+    name: 'Netflix GPT',
+    short_name: 'Netflix GPT',
+    description: 'Netflix GPT is a movie recommendation app powered by GroqAI.',
     theme_color: '#ffffff',
     start_url: '/',
     scope: '/',

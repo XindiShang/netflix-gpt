@@ -4,6 +4,7 @@ import { auth } from '@/lib/firebase.config';
 import storage from '@/lib/localStorage';
 import { logger } from './logger';
 import useGptStore from './useGptStore';
+import useMovieStore from './useMovieStore';
 
 interface User {
   id: string;
@@ -48,8 +49,11 @@ const useAuthStore = create<AuthStore>()(
         set({ user, token, isAuthenticated: true });
       },
       clearAuthData: () => {
-        const { reset } = useGptStore.getState();
-        reset();
+        const { reset: resetGptStore } = useGptStore.getState();
+        const { reset: resetMovieStore } = useMovieStore.getState();
+
+        resetGptStore();
+        resetMovieStore();
 
         storage.removeItem('user');
         storage.removeItem('token');

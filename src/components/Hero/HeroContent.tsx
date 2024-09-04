@@ -5,12 +5,14 @@ interface HeroContentProps {
   title: string;
   description: string;
   onCtaClick: () => void;
+  onInfoClick: () => void;
 }
 
 const HeroContent: React.FC<HeroContentProps> = ({
   title,
   description,
   onCtaClick,
+  onInfoClick,
 }) => {
   const { t } = useTranslation();
 
@@ -23,7 +25,7 @@ const HeroContent: React.FC<HeroContentProps> = ({
           <PlayIcon className="w-5 h-5" />
           {t('hero.ctaLabel')}
         </button>
-        <button className="btn btn-neutral">
+        <button className="btn btn-neutral" onClick={onInfoClick}>
           <InformationCircleIcon className="w-5 h-5" />
           {t('hero.moreInfo')}
         </button>

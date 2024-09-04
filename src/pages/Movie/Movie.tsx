@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import MovieOverview from '@/components/Movie/MovieOverview';
+import MovieInfo from '@/components/Movie/MovieInfo';
 import MovieTrailer from '@/components/Movie/MovieTrailer';
 import { useMovieDetailsQuery } from '@/services/queries/movie.query';
 
@@ -30,7 +30,7 @@ const MoviePage = () => {
       </div>
 
       <div className="flex-1 h-1/2 md:h-full">
-        <MovieOverview movieDetails={data} />
+        <MovieInfo movieDetails={data} />
       </div>
     </div>
   );

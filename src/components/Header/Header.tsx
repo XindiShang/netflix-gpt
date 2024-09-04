@@ -7,17 +7,14 @@ import {
   LanguageIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
-// import { useWindowScroll } from "@uidotdev/usehooks";
+import { LOGO, supportedLanguages, USER_AVATAR } from '@/lib/constants';
 import { useLogoutQuery } from '@/services/queries/auth.query';
 import useAuthStore from '@/store/useAuthStore';
 import type { Language } from '@/types/i18n';
-import { LOGO, supportedLanguages, USER_AVATAR } from '@/utils/constants';
 
-// TODO: Decide whether to use collapse menu
 const Header = () => {
   const { i18n, t } = useTranslation();
   const { pathname } = useLocation();
-  // const [{ y }] = useWindowScroll();
 
   const { isAuthenticated, clearAuthData, user } = useAuthStore();
 
@@ -33,8 +30,6 @@ const Header = () => {
   const changeLanguage = async (language: string) => {
     await i18n.changeLanguage(language);
   };
-
-  // const headerBgClass = y && y > 50 ? 'bg-black' : 'bg-transparent';
 
   const handleLogout = async () => {
     try {
@@ -53,7 +48,6 @@ const Header = () => {
   }, [isLogoutError]);
 
   return (
-    // <nav className={`sticky top-0 z-10 w-full backdrop-blur-md ${headerBgClass}`}>
     <nav className="absolute z-20 w-full">
       <div className="navbar md:px-24">
         <div className="navbar-start">
@@ -66,44 +60,6 @@ const Header = () => {
           </a>
         </div>
 
-        {/* collapse menu */}
-        {/* <div className="navbar-end">
-          <div className="text-slate-500 dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-            </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-secondary text-white rounded-box w-52">
-              {
-                isAuthenticated && (
-                  <>
-                    <li>
-                      <a
-                        className='bg-secondary hover:bg-slate-500/30 hover:text-primary focus:!text-primary'
-                      >
-                        <div className="avatar">
-                          <div className="w-6 rounded-full">
-                            <img src={user?.avatar as string} />
-                          </div>
-                        </div>
-                        <span>{user?.name}</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className='bg-secondary hover:bg-slate-500/30 hover:text-primary focus:!text-primary'
-                        onClick={clearAuthData}
-                      >
-                        Logout
-                      </a>
-                    </li>
-                  </>
-                )
-              }
-            </ul>
-          </div>
-        </div> */}
-
-        {/* Add hidden if use collapse menu */}
         <div className="items-center space-x-3 navbar-end lg:flex">
           {/* GPT Search */}
           {isAuthenticated && (
@@ -171,9 +127,7 @@ const Header = () => {
                 <li>
                   <a className="bg-secondary hover:bg-slate-500/30 hover:text-primary focus:!text-primary">
                     {t('user.profile')}
-                    <span className="badge badge-primary">
-                      {t('badges.new')}
-                    </span>
+                    <span className="badge badge-ghost">{t('badges.dev')}</span>
                   </a>
                 </li>
                 <li>

@@ -1,4 +1,4 @@
-import { BG_URL } from '@/utils/constants';
+import { BG_URL } from '@/lib/constants';
 import GptSearchBar from './GptSearchBar';
 import GptSuggestions from './GptSuggestions';
 

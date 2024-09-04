@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { formatMoney } from '@/lib/helper';
 import { type MovieDetails } from '@/types/movie';
 
-const MovieOverview = ({ movieDetails }: { movieDetails?: MovieDetails }) => {
+const MovieInfo = ({ movieDetails }: { movieDetails?: MovieDetails }) => {
   const { t } = useTranslation();
 
   if (!movieDetails) {
@@ -32,7 +32,7 @@ const MovieOverview = ({ movieDetails }: { movieDetails?: MovieDetails }) => {
   };
 
   const voteAverageEmoji =
-    vote_average >= 7 ? '👍' : vote_average >= 4 ? '👌' : '👎';
+    vote_average >= 7 ? '😁' : vote_average >= 4 ? '😐' : '😞';
 
   return (
     <div className="h-screen p-6 mx-4 overflow-x-hidden text-white rounded-lg shadow-xl bg-neutral glass">
@@ -147,4 +147,4 @@ const MovieOverview = ({ movieDetails }: { movieDetails?: MovieDetails }) => {
   );
 };
 
-export default MovieOverview;
+export default MovieInfo;

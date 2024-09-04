@@ -63,10 +63,6 @@
     "overview": "概览",
     "releaseDate": "上映日期",
     "duration": "时长",
-    "cast": "演员",
-    "director": "导演",
-    "viewTrailer": "观看预告片",
-    "watchNow": "立即观看",
     "noMovies": "未找到电影",
     "noMovieDetails": "未找到电影详情",
     "error": "抱歉，出现了一些问题。请稍后再试。",
@@ -89,9 +85,12 @@
   },
   "badges": {
     "new": "新",
-    "comingSoon": "即将上映",
-    "exclusive": "独家",
-    "trending": "热门",
-    "popular": "流行"
+    "dev": "开发中"
+  },
+  "footer": {
+    "disclaimer1": "这不是Netflix的官方网站",
+    "disclaimer2": "这是仅用于教育目的的个人项目",
+    "disclaimer3": "所有图片、标志和名称均为Netflix的商标",
+    "disclaimer4": "无商业用途或盈利目的"
   }
 }

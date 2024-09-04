@@ -4,12 +4,12 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import { SENSITIVE_CONTENT_KEYWORDS } from '@/lib/constants';
 import aiClient from '@/lib/groqAI';
 import { createGptSchema } from '@/lib/validation';
 import { searchMovies } from '@/services/api/movie.service';
 import useGptStore from '@/store/useGptStore';
 import type { GptBody } from '@/types/gpt';
-import { SENSITIVE_CONTENT_KEYWORDS } from '@/utils/constants';
 
 const GptSearchBar = () => {
   const { t, i18n } = useTranslation();
@@ -67,12 +67,12 @@ const GptSearchBar = () => {
           placeholder={t('gpt.searchPlaceholder')}
           register={register}
           name="search"
-          wrapperClassName="col-span-10 px-4 py-2"
+          wrapperClassName="col-span-9 lg:col-span-10 px-4 py-2"
         />
         <Button
           text={t('gpt.searchAction')}
           type="submit"
-          className="col-span-2 px-4 py-2 m-2 text-white rounded-lg btn btn-primary"
+          className="col-span-3 px-4 py-2 m-2 text-white rounded-lg lg:col-span-2 btn btn-primary"
           isLoading={isSearching}
           disabled={isSearching}
         />

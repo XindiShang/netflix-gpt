@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import Hero from '@/components/Hero';
 import MovieSection from '@/components/Movie';
 import {
@@ -10,6 +11,7 @@ import {
 } from '@/services/queries/movie.query';
 
 const Browse = () => {
+  const navigate = useNavigate();
   const { i18n, t } = useTranslation();
   const currentLanguage = i18n.language;
 
@@ -59,13 +61,22 @@ const Browse = () => {
 
   const firstMovie = nowPlayingMoviesData.results[0];
 
+  const navigateToMovieDetails = (id: number) => {
+    navigate(`/movie/${id}`);
+  };
+
   return (
     <>
       <Hero
         movieId={firstMovie.id}
         title={firstMovie.title}
         description={firstMovie.overview}
-        onCtaClick={() => {}}
+        onCtaClick={() => {
+          navigateToMovieDetails(firstMovie.id);
+        }}
+        onInfoClick={() => {
+          navigateToMovieDetails(firstMovie.id);
+        }}
       />
       <MovieSection
         nowPlaying={nowPlayingMoviesData.results}

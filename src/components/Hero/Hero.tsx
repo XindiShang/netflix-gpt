@@ -10,6 +10,7 @@ interface HeroProps {
   title: string;
   description: string;
   onCtaClick: () => void;
+  onInfoClick: () => void;
 }
 
 const Hero: React.FC<HeroProps> = ({
@@ -17,6 +18,7 @@ const Hero: React.FC<HeroProps> = ({
   title,
   description,
   onCtaClick,
+  onInfoClick,
 }) => {
   const { setTrailerVideo, trailerVideo } = useMovieStore();
 
@@ -59,6 +61,7 @@ const Hero: React.FC<HeroProps> = ({
         title={title}
         description={description}
         onCtaClick={onCtaClick}
+        onInfoClick={onInfoClick}
       />
     </div>
   );

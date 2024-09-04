@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-saga-ts-vite-boilerplate",
+  "name": "netflix-gpt",
   "version": "0.0.4",
   "scripts": {
     "start": "pnpm run build:css && concurrently \"pnpm run watch:css\" \"vite --host\"",

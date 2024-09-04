@@ -63,10 +63,6 @@
     "overview": "Overview",
     "releaseDate": "Release Date",
     "duration": "Duration",
-    "cast": "Cast",
-    "director": "Director",
-    "viewTrailer": "View Trailer",
-    "watchNow": "Watch Now",
     "noMovies": "No movies found",
     "noMovieDetails": "No movie details found",
     "error": "Something went wrong. Please try again later.",
@@ -89,8 +85,12 @@
   },
   "badges": {
     "new": "New",
-    "comingSoon": "Coming Soon",
-    "exclusive": "Exclusive",
-    "trending": "Trending"
+    "dev": "In Development"
+  },
+  "footer": {
+    "disclaimer1": "This is not the official Netflix website.",
+    "disclaimer2": "It is a clone created solely for educational purposes.",
+    "disclaimer3": "All images, logos, and names are trademarks of Netflix.",
+    "disclaimer4": "No commercial use or ownership is intended."
   }
 }

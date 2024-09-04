@@ -1,64 +1,52 @@
-# React Query, Zustand, TypeScript & Vite Boilerplate
+# Netflix GPT 🎥🤖
 
-This is a template repository to set up a project using React, React Query, Zustand, TypeScript, and Vite, aiming to provide a scalable structure and essential configurations to kick-start your next application.
+**Netflix GPT** is a Netflix clone that uses AI to provide personalized movie recommendations. Users can search for movies and get suggestions powered by GPT.
 
-## Stack
+This project is based on a boilerplate by [ascii-16](https://github.com/ascii-16/react-query-zustand-ts-vite-boilerplate) and was inspired by [Akshay Saini](https://github.com/akshaymarch7). It uses modern tools like **React**, **React Query**, **Zustand**, **TypeScript**, and **Vite** for a fast and smooth experience. Additionally, it features **i18n** for localization, **Firebase Authentication**, and **DaisyUI** for a Tailwind-based UI design.
 
-![My Tech Stack](https://github-readme-tech-stack.vercel.app/api/cards?align=center&titleAlign=center&lineCount=4&theme=github_dark&hideTitle=true&line1=react,react,61DAFB;react-query,react-query,FF4500;&line3=typescript,typescript,3178C6;vite,vite,646CFF;&line2=zustand,zustand,64D5CA;axios,axios,4183C4;&line4=eslint,eslint,4B32C3;prettier,prettier,F7B93E;)
+## 🚀 Tech Stack
 
-| Tool         | Purpose                                           |
-| ------------ | ------------------------------------------------- |
-| React        | A JavaScript library for building user interfaces |
-| React Query  | Data synchronization library for React            |
-| Zustand      | Minimalist state management                       |
-| TypeScript   | Static typing for JavaScript                      |
-| Vite         | Build tool and development server                 |
+![My Tech Stack](https://github-readme-tech-stack.vercel.app/api/cards?align=center&titleAlign=center&lineCount=4&theme=github_dark&hideTitle=true&line1=react,react,61DAFB;react+query,react+query,FF4500;zustand,zustand,64D5CA;&line2=axios,axios,4183C4;typescript,typescript,3178C6;vite,vite,646CFF;&line3=eslint,eslint,4B32C3;prettier,prettier,F7B93E;Firebase,firebase,FFCA28;&line4=I18next,i18next,26A69A;DaisyUI,daisy+ui,4DC0B5;groq,groq,FFB800)
 
-## Features
+## 💡 Features
 
-:white_check_mark: Faster build with Vite
+- 🎯 AI-powered movie recommendations using **GROQ AI**  
+- 🌎 Multi-language support via **i18next**
+- 🔒 Secure authentication using **Firebase**
+- ⚡ Super-fast builds and optimizations with **Vite**
+- 💻 Elegant UI and state management using **Zustand** and **DaisyUI** 
+- 🔐 Type safety with **TypeScript** 
 
-:white_check_mark: State management using Zustand
 
-:white_check_mark: Data fetching using React Query and Axios
-
-:white_check_mark: TypeScript for static typing
-
-:white_check_mark: Pre-configured with ESLint and Prettier for code linting and formatting
-
-:white_check_mark: Includes example components to get started quickly
-
-## Required Versions
+## 💻 Required Versions
 
 | Tool        | Version    |
 | ----------- | ---------- |
 | NodeJS      | >=16       |
 | TypeScript  | >=4.9.4    |
 
-## Getting Started
+## 📋 Getting Started
 
 ### Clone the repository
 
 ```
-git clone https://github.com/vintagegnome/react-query-zustand-ts-vite-boilerplate.git
-cd react-query-zustand-ts-vite-boilerplate
+git clone https://github.com/XindiShang/netflix-gpt.git
+cd netflix-gpt
 ```
 
-### Installing Dependencies
+### Install dependencies
 
 ```
-npm install
+pnpm install
 ```
 
-### Running Locally
-
-To run the project locally, simply execute:
+### Running the app
 
 ```
-npm run dev
+pnpm run dev
 ```
 
-## Scripts
+## 🛠️ Scripts
 
 | Command       | Description                                                                  |
 | ------------- | -----------------------------------------------------------------------------|
@@ -76,53 +64,37 @@ npm run dev
 | `prepare`     | Set up Husky for git hooks in a production environment                       |
 
 
-## Project Structure
-
-Here's a basic overview of the significant folders in the boilerplate:
+## 🌲 Project Structure
 
 ```
 ├── public
 └── src
   ├── components
-  ├── hooks
-  ├── lib
   ├── pages
-  ├── routes
   ├── services
   ├── store
   └── types
+  ├── routes
+  ├── lib
+  ├── i18n
 ```
-
 
 | Folder      | Description                                                                                          |
 |-------------|------------------------------------------------------------------------------------------------------|
 | **`src/`**   | Contains the main source code for the application.                                                   |
 | `components`| Reusable React components, each handling a specific piece of the UI.                                  |
-| `hooks`     | Custom React hooks that encapsulate logic and behaviors which can be reused across different components.  |
 | `lib`       | Miscellaneous utility functions, helpers, and other standalone pieces of logic.                          |
 | `pages`     | Components representing full pages in the application, typically corresponding to routes.                |
 | `routes`    | Configuration and components related to routing in the application.                                     |
 | `services`  | Functions or classes that handle tasks like API calls, data processing, or other "service"-like tasks.    |
-| `store`     | Zustand st ores for state management, holding |
-| **`public/`**   | Contains static assets like images, fonts, and the entry HTML file. Assets in this directory are served directly and are not processed by bundlers like Vite. |
+| `store`     | Zustand stores for state management.                                                                  |
+| `i18n`      | Internationalization and localization configuration and utilities.                                     |
+| **`public/`**| Contains static assets like images, fonts, and the entry HTML file. Assets in this directory are served directly and are not processed by bundlers like Vite. |
 
-
-
-
-## Features
-
-| Tool/Library | Description                                                    |
-|--------------|----------------------------------------------------------------|
-| React Query  | Helps in fetching, caching, and updating asynchronous data.    |
-| Zustand      | For simple and scalable state management.                      |
-| TypeScript   | For type-safe code and scalability.                            |
-| Vite         | For faster builds and a smoother developer experience.         |
-
-
-## Contribution
+## 🤝 Contribution
 
 If you'd like to contribute to this boilerplate, feel free to fork and send a PR. All contributions are welcome!
 
-## License
+## 📝 License
 
 [MIT](https://choosealicense.com/licenses/mit/)
